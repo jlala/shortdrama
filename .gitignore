@@ -4,3 +4,7 @@
 __pycache__/
 *.pyc
 runs/
+
+# 香虫虫剧本与项目资料只留本地
+scripts/xiangchongchong/
+docs/香虫虫-*
