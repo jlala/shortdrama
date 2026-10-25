@@ -1,0 +1,13 @@
+{
+  "schema_version": "0.2",
+  "example_only": true,
+  "project_id": "coffee-morning",
+  "name": "晨光咖啡：本地分镜预演",
+  "canvas_project_id": null,
+  "generation_authorization": {
+    "approved": false,
+    "credit_cap": null,
+    "scope": null,
+    "approval_ref": null
+  }
+}

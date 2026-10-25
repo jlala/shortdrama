@@ -1,0 +1,35 @@
+{
+  "schema_version": "0.2",
+  "example_only": true,
+  "project_id": "pilot-example",
+  "episode_id": "E01",
+  "shots": [
+    {
+      "shot_id": "E01-SC01-SH001",
+      "revision": "v01",
+      "narrative_goal": "主角展开委托信，发现没有署名",
+      "references": [
+        {
+          "file": null,
+          "resource_id": null,
+          "purpose": "已选独立关键帧，展示折叠信纸和主角手部"
+        }
+      ],
+      "video_request": {
+        "mode": "m2v",
+        "prompt": "轻轻展开信纸，随后停住，固定机位，保持衣袖、桌面和信纸一致",
+        "model": null,
+        "duration": null,
+        "ratio": null,
+        "resolution": null
+      },
+      "planned_edit_seconds": 4,
+      "acceptance": [
+        "手部结构、衣袖、桌面与已选关键帧一致",
+        "只展开信纸，无新增道具或突变机位",
+        "最终停住的状态便于接镜",
+        "下载文件实际播放检查画面与动作"
+      ]
+    }
+  ]
+}

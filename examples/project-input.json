@@ -1,0 +1,13 @@
+{
+  "schema_version": "0.2",
+  "example_only": true,
+  "project_id": "pilot-example",
+  "name": "单镜头工作流验证示例",
+  "canvas_project_id": null,
+  "generation_authorization": {
+    "approved": false,
+    "credit_cap": null,
+    "scope": null,
+    "approval_ref": null
+  }
+}

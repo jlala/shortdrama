@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2",
+  "example_only": true,
+  "project_id": "coffee-morning",
+  "episode_id": "E01",
+  "edit_order": ["E01-SC01-SH001@v01"],
+  "shots": [
+    {
+      "shot_id": "E01-SC01-SH001",
+      "revision": "v01",
+      "narrative_goal": "以一杯晨光中的咖啡建立安静温暖的清晨氛围",
+      "framing": "竖屏近景，杯子为视觉主体，窗户交代光源",
+      "action": "咖啡杯保持静止，杯口热气轻轻上升；当前预演仅用静帧验证节奏",
+      "camera": "计划视频缓慢推进；当前静态预演使用固定画面",
+      "image_prompt": "早晨暖阳透过窗户，照射在木桌上的陶瓷咖啡杯上。自然写实，窗框阴影清晰，杯口少量热气，竖屏9:16，无人物、无文字。",
+      "continuity_in": "开场，从安静的室内开始",
+      "continuity_out": "保持杯子和光线稳定，为下一镜留出剪辑点",
+      "references": [
+        {"file": null, "resource_id": null, "purpose": "导入已有咖啡首帧"}
+      ],
+      "video_request": {
+        "mode": "m2v",
+        "prompt": "早晨暖阳透过窗户照射在木桌上的咖啡杯上。镜头非常缓慢、平稳地向咖啡杯推进，杯口热气轻轻上升、自然飘散。保持杯子形状、位置和窗户结构一致，阳光与窗框阴影稳定，咖啡液面基本平静。单一连续镜头，无人物、无新增物品、无切换、无明显闪烁。",
+        "model": null,
+        "duration": null,
+        "ratio": "9:16",
+        "resolution": null
+      },
+      "planned_edit_seconds": 6,
+      "audio": {"text": "晨光落在杯沿。今天，慢一点。", "voice": "Tingting"},
+      "subtitle": "晨光落在杯沿。\n今天，慢一点。",
+      "acceptance": [
+        "咖啡杯、窗户和光线与已选首帧一致",
+        "临时旁白完整，结尾留有停顿",
+        "静态预演不作为热气或运镜质量的验收结果"
+      ]
+    }
+  ]
+}
