@@ -1,0 +1,14 @@
+用法：
+  dreamina-canvas resource download <resource-id> [flags]
+
+参数：
+  -h, --help                显示 dreamina-canvas resource download 的帮助
+  -o, --output string       输出文件（路径原样使用，不转码）或已存在目录（采用服务端文件名） (default ".")
+      --project-id string   项目 UUID；省略时使用当前项目
+
+全局参数：
+      --format string     输出格式：json 或 table
+      --non-interactive   禁用交互提示
+      --profile string    本地登录态隔离名称 (default "default")
+      --region string     产品区域：cn；缺省 cn (default "cn")
+      --yes               确认策略允许由参数确认的操作

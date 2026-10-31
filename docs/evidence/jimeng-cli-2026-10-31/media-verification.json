@@ -1,0 +1,103 @@
+[
+  {
+    "file": "director-local-test.mp4",
+    "size": 150487,
+    "sha256": "ad20b29d4ba113257d4bec1aef7485b6b5090929c0e021da1aae7f2ce4119144",
+    "probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 1280,
+          "height": 720,
+          "r_frame_rate": "24/1",
+          "nb_frames": "48"
+        }
+      ],
+      "format": {
+        "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+        "duration": "2.000000"
+      }
+    },
+    "decodeExit": 0,
+    "decodeError": ""
+  },
+  {
+    "file": "download-check/image.bin",
+    "size": 2624615,
+    "sha256": "795927ba41916f14207305ef0293f2093e51677cc62f5baa2cf3aeb62e287e67",
+    "probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "png",
+          "codec_type": "video",
+          "width": 941,
+          "height": 1672,
+          "r_frame_rate": "25/1"
+        }
+      ],
+      "format": {
+        "format_name": "png_pipe"
+      }
+    },
+    "decodeExit": 0,
+    "decodeError": ""
+  },
+  {
+    "file": "download-check/video.bin",
+    "size": 4451535,
+    "sha256": "251f78ad8611c2e7f713c84b0cb6f4fc15921672ecf92229130ff1296a707b21",
+    "probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "r_frame_rate": "0/0",
+          "nb_frames": "220"
+        },
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 480,
+          "height": 854,
+          "r_frame_rate": "60/1",
+          "nb_frames": "121"
+        }
+      ],
+      "format": {
+        "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+        "duration": "5.056009"
+      }
+    },
+    "decodeExit": 0,
+    "decodeError": ""
+  },
+  {
+    "file": "download-check/audio.bin",
+    "size": 41005,
+    "sha256": "aff8e96ed72889f5c17fbe4067d48135ce968f91c72db36781d094788808c775",
+    "probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "mp3",
+          "codec_type": "audio",
+          "r_frame_rate": "0/0"
+        }
+      ],
+      "format": {
+        "format_name": "mp3",
+        "duration": "1.280000"
+      }
+    },
+    "decodeExit": 0,
+    "decodeError": ""
+  }
+]

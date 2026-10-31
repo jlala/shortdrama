@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "1",
+  "ok": true,
+  "data": {
+    "items": [
+      {
+        "assetId": "canonical:dpa_50b43d8c7e355ddf9f202709712d0418",
+        "kind": "character",
+        "name": "男性人偶",
+        "nameEn": "Male Mannequin"
+      }
+    ],
+    "hasMore": true,
+    "nextOffset": 1
+  }
+}

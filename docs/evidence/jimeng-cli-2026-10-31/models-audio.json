@@ -1,0 +1,148 @@
+{
+  "schemaVersion": "1",
+  "ok": true,
+  "data": {
+    "items": [
+      {
+        "type": "audio",
+        "model": "legacy_tts",
+        "displayName": "Seed TTS",
+        "modes": [
+          {
+            "name": "tts",
+            "flags": [
+              {
+                "flag": "--prompt",
+                "required": true,
+                "minLength": 1,
+                "maxLength": 300
+              }
+            ],
+            "references": {
+              "min": 0,
+              "max": 0,
+              "types": []
+            },
+            "vipRequired": false
+          }
+        ]
+      },
+      {
+        "type": "audio",
+        "model": "seed_audio_v1",
+        "displayName": "SeedAudio 1.0",
+        "modes": [
+          {
+            "scenario": "omni-dubbing",
+            "name": "tts",
+            "flags": [
+              {
+                "flag": "--scenario",
+                "required": true,
+                "values": [
+                  "omni-dubbing"
+                ]
+              },
+              {
+                "flag": "--prompt",
+                "required": true,
+                "minLength": 1,
+                "maxLength": 3000
+              }
+            ],
+            "references": {
+              "min": 0,
+              "max": 3,
+              "types": [
+                {
+                  "mediaType": "image",
+                  "min": 0,
+                  "max": 1
+                },
+                {
+                  "mediaType": "audio",
+                  "min": 0,
+                  "max": 3
+                }
+              ],
+              "mutuallyExclusiveTypes": [
+                "image",
+                "audio"
+              ]
+            },
+            "vipRequired": false
+          },
+          {
+            "scenario": "text-reading",
+            "name": "tts",
+            "flags": [
+              {
+                "flag": "--scenario",
+                "required": true,
+                "values": [
+                  "text-reading"
+                ]
+              },
+              {
+                "flag": "--voice-name",
+                "required": true
+              },
+              {
+                "flag": "--prompt",
+                "required": true,
+                "minLength": 1,
+                "maxLength": 3000
+              }
+            ],
+            "references": {
+              "min": 0,
+              "max": 1,
+              "types": [
+                {
+                  "mediaType": "audio",
+                  "min": 0,
+                  "max": 1
+                }
+              ]
+            },
+            "vipRequired": false
+          }
+        ]
+      },
+      {
+        "type": "audio",
+        "model": "seed_music_1.0",
+        "displayName": "SeedMusic 1.0 Preview",
+        "modes": [
+          {
+            "name": "music",
+            "flags": [
+              {
+                "flag": "--prompt",
+                "required": true,
+                "minLength": 1,
+                "maxLength": 4000
+              },
+              {
+                "flag": "--duration",
+                "required": true,
+                "min": 30,
+                "max": 360,
+                "step": 1
+              }
+            ],
+            "references": {
+              "min": 0,
+              "max": 0,
+              "types": []
+            },
+            "vipRequired": false
+          }
+        ]
+      }
+    ]
+  },
+  "meta": {
+    "requestId": "202610311729441EB92C8D743482AD5DE9"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1",
+  "ok": true,
+  "data": {
+    "models": {
+      "legacy_tts": {
+        "items": [
+          {
+            "voiceName": "直爽女大",
+            "voiceId": "7597003459665072686",
+            "platform": "loki",
+            "tags": {
+              "accent": "多情感",
+              "age": "青年",
+              "gender": "女",
+              "language": "普通话"
+            },
+            "previewAvailable": false
+          }
+        ],
+        "hasMore": true,
+        "nextOffset": 1,
+        "totalCount": 142
+      },
+      "seed_audio_v1": {
+        "items": [
+          {
+            "voiceName": "动漫海绵",
+            "voiceId": "6954271730848240136",
+            "platform": "dmop",
+            "previewAvailable": true
+          }
+        ],
+        "hasMore": true,
+        "nextOffset": 1,
+        "totalCount": 143
+      }
+    }
+  },
+  "meta": {
+    "requestId": "202610311729440FDE962FD9CACEC0AAC2"
+  }
+}

@@ -1,0 +1,965 @@
+[
+  {
+    "path": "model",
+    "summary": "查询生成模型及其可调用规格",
+    "reads": true,
+    "writes": false,
+    "arguments": [
+      "name"
+    ],
+    "flags": [
+      "--type"
+    ]
+  },
+  {
+    "path": "model list",
+    "summary": "列出生成模型及可填写 flag",
+    "reads": true,
+    "writes": false,
+    "flags": [
+      "--type"
+    ]
+  },
+  {
+    "path": "model find",
+    "summary": "按展示名或别名定位可调用的 canonical model",
+    "reads": true,
+    "writes": false,
+    "arguments": [
+      "name"
+    ],
+    "flags": [
+      "--type"
+    ]
+  },
+  {
+    "path": "voice",
+    "summary": "查询可用于音频生成的音色",
+    "reads": true,
+    "writes": false
+  },
+  {
+    "path": "voice list",
+    "summary": "列出可用于 tts 的音色及 ID",
+    "reads": true,
+    "writes": false,
+    "flags": [
+      "--offset",
+      "--count",
+      "--model"
+    ]
+  },
+  {
+    "path": "node",
+    "summary": "创建、编辑、删除、读取或运行 typed 画布节点",
+    "reads": true,
+    "writes": true
+  },
+  {
+    "path": "node create",
+    "summary": "创建 typed 画布节点，不触发生成",
+    "reads": true,
+    "writes": true
+  },
+  {
+    "path": "node create image",
+    "summary": "创建图片节点，不触发生成",
+    "reads": true,
+    "writes": true,
+    "flags": [
+      "--x",
+      "--y",
+      "--project-id",
+      "--node-id",
+      "--update-id",
+      "--dry-run",
+      "--resource-source",
+      "--title",
+      "--tag",
+      "--clear-tags",
+      "--mode",
+      "--prompt",
+      "--model",
+      "--ratio",
+      "--resolution",
+      "--count",
+      "--ref",
+      "--resource-id",
+      "--import-kind",
+      "--run",
+      "--submit-id",
+      "--credit-token",
+      "--credit-ceiling",
+      "--wait",
+      "--timeout",
+      "--interval"
+    ]
+  },
+  {
+    "path": "node create video",
+    "summary": "创建视频节点，不触发生成",
+    "reads": true,
+    "writes": true,
+    "flags": [
+      "--x",
+      "--y",
+      "--project-id",
+      "--node-id",
+      "--update-id",
+      "--dry-run",
+      "--resource-source",
+      "--title",
+      "--tag",
+      "--clear-tags",
+      "--mode",
+      "--prompt",
+      "--model",
+      "--ratio",
+      "--resolution",
+      "--duration",
+      "--count",
+      "--ref",
+      "--resource-id",
+      "--import-kind",
+      "--run",
+      "--submit-id",
+      "--credit-token",
+      "--credit-ceiling",
+      "--wait",
+      "--timeout",
+      "--interval"
+    ]
+  },
+  {
+    "path": "node create audio",
+    "summary": "创建音频节点；--run 时保存、报价、按服务端要求批准并运行",
+    "reads": true,
+    "writes": true,
+    "flags": [
+      "--x",
+      "--y",
+      "--project-id",
+      "--node-id",
+      "--update-id",
+      "--dry-run",
+      "--resource-source",
+      "--title",
+      "--tag",
+      "--clear-tags",
+      "--mode",
+      "--prompt",
+      "--model",
+      "--duration",
+      "--voice-id",
+      "--voice-name",
+      "--scenario",
+      "--ref",
+      "--resource-id",
+      "--import-kind",
+      "--run",
+      "--submit-id",
+      "--credit-token",
+      "--credit-ceiling",
+      "--wait",
+      "--timeout",
+      "--interval"
+    ]
+  },
+  {
+    "path": "node create element",
+    "summary": "创建Element 节点，不触发生成",
+    "reads": true,
+    "writes": true,
+    "flags": [
+      "--x",
+      "--y",
+      "--project-id",
+      "--node-id",
+      "--update-id",
+      "--dry-run",
+      "--resource-source",
+      "--title",
+      "--description",
+      "--tag",
+      "--clear-tags",
+      "--main",
+      "--voice",
+      "--auxiliary",
+      "--import-kind"
+    ]
+  },
+  {
+    "path": "node create text",
+    "summary": "创建文本节点，不触发生成",
+    "reads": true,
+    "writes": true,
+    "flags": [
+      "--x",
+      "--y",
+      "--project-id",
+      "--node-id",
+      "--update-id",
+      "--dry-run",
+      "--title",
+      "--text",
+      "--import-kind"
+    ]
+  },
+  {
+    "path": "node create timeline",
+    "summary": "创建时间轴，把多个素材按顺序拼接，不触发生成",
+    "reads": true,
+    "writes": true,
+    "flags": [
+      "--x",
+      "--y",
+      "--project-id",
+      "--node-id",
+      "--update-id",
+      "--dry-run",
+      "--resource-source",
+      "--title",
+      "--clip",
+      "--audio-clip",
+      "--import-kind"
+    ]
+  },
+  {
+    "path": "node edit",
+    "summary": "编辑已保存的 typed 画布节点，不触发生成",
+    "reads": true,
+    "writes": true
+  },
+  {
+    "path": "node edit image",
+    "summary": "编辑图片节点，不触发生成",
+    "reads": true,
+    "writes": true,
+    "flags": [
+      "--x",
+      "--y",
+      "--project-id",
+      "--node-id",
+      "--update-id",
+      "--dry-run",
+      "--resource-source",
+      "--title",
+      "--tag",
+      "--clear-tags",
+      "--clear-generation",
+      "--mode",
+      "--prompt",
+      "--model",
+      "--ratio",
+      "--resolution",
+      "--count",
+      "--ref",
+      "--run",
+      "--submit-id",
+      "--credit-token",
+      "--credit-ceiling",
+      "--wait",
+      "--timeout",
+      "--interval"
+    ]
+  },
+  {
+    "path": "node edit video",
+    "summary": "编辑视频节点，不触发生成",
+    "reads": true,
+    "writes": true,
+    "flags": [
+      "--x",
+      "--y",
+      "--project-id",
+      "--node-id",
+      "--update-id",
+      "--dry-run",
+      "--resource-source",
+      "--title",
+      "--tag",
+      "--clear-tags",
+      "--clear-generation",
+      "--mode",
+      "--prompt",
+      "--model",
+      "--ratio",
+      "--resolution",
+      "--duration",
+      "--count",
+      "--ref",
+      "--run",
+      "--submit-id",
+      "--credit-token",
+      "--credit-ceiling",
+      "--wait",
+      "--timeout",
+      "--interval"
+    ]
+  },
+  {
+    "path": "node edit audio",
+    "summary": "编辑音频节点；--run 时保存、报价、按服务端要求批准并运行",
+    "reads": true,
+    "writes": true,
+    "flags": [
+      "--x",
+      "--y",
+      "--project-id",
+      "--node-id",
+      "--update-id",
+      "--dry-run",
+      "--resource-source",
+      "--title",
+      "--tag",
+      "--clear-tags",
+      "--clear-generation",
+      "--mode",
+      "--prompt",
+      "--model",
+      "--duration",
+      "--voice-id",
+      "--voice-name",
+      "--scenario",
+      "--ref",
+      "--run",
+      "--submit-id",
+      "--credit-token",
+      "--credit-ceiling",
+      "--wait",
+      "--timeout",
+      "--interval"
+    ]
+  },
+  {
+    "path": "node edit element",
+    "summary": "编辑Element 节点，不触发生成",
+    "reads": true,
+    "writes": true,
+    "flags": [
+      "--x",
+      "--y",
+      "--project-id",
+      "--node-id",
+      "--update-id",
+      "--dry-run",
+      "--resource-source",
+      "--title",
+      "--description",
+      "--tag",
+      "--clear-tags",
+      "--main",
+      "--voice",
+      "--auxiliary",
+      "--clear-description",
+      "--clear-main",
+      "--clear-voice",
+      "--clear-auxiliary"
+    ]
+  },
+  {
+    "path": "node edit text",
+    "summary": "编辑文本节点，不触发生成",
+    "reads": true,
+    "writes": true,
+    "flags": [
+      "--x",
+      "--y",
+      "--project-id",
+      "--node-id",
+      "--update-id",
+      "--dry-run",
+      "--title",
+      "--text"
+    ]
+  },
+  {
+    "path": "node edit timeline",
+    "summary": "编辑时间轴，把多个素材按顺序拼接，不触发生成",
+    "reads": true,
+    "writes": true,
+    "flags": [
+      "--x",
+      "--y",
+      "--project-id",
+      "--node-id",
+      "--update-id",
+      "--dry-run",
+      "--resource-source",
+      "--title",
+      "--clip",
+      "--audio-clip",
+      "--clear-tracks"
+    ]
+  },
+  {
+    "path": "node upscale",
+    "summary": "提升已生成图片或视频的清晰度，创建新节点",
+    "reads": true,
+    "writes": true
+  },
+  {
+    "path": "node upscale image",
+    "summary": "图片超清：提交即执行，无 --run；等待终态直接使用 --wait",
+    "reads": true,
+    "writes": true,
+    "flags": [
+      "--project-id",
+      "--node-id",
+      "--submit-id",
+      "--mode",
+      "--resolution",
+      "--detail",
+      "--title",
+      "--credit-token",
+      "--credit-ceiling",
+      "--wait",
+      "--timeout",
+      "--interval",
+      "--dry-run"
+    ]
+  },
+  {
+    "path": "node upscale video",
+    "summary": "后编辑：提交即执行，无 --run；等待终态直接使用 --wait",
+    "reads": true,
+    "writes": true,
+    "flags": [
+      "--project-id",
+      "--node-id",
+      "--submit-id",
+      "--title",
+      "--credit-token",
+      "--credit-ceiling",
+      "--wait",
+      "--timeout",
+      "--interval",
+      "--dry-run",
+      "--resolution"
+    ]
+  },
+  {
+    "path": "node cutout",
+    "summary": "图片抠图",
+    "reads": true,
+    "writes": true
+  },
+  {
+    "path": "node cutout image",
+    "summary": "后编辑：提交即执行，无 --run；等待终态直接使用 --wait",
+    "reads": true,
+    "writes": true,
+    "flags": [
+      "--project-id",
+      "--node-id",
+      "--submit-id",
+      "--title",
+      "--credit-token",
+      "--credit-ceiling",
+      "--wait",
+      "--timeout",
+      "--interval",
+      "--dry-run"
+    ]
+  },
+  {
+    "path": "node interpolate",
+    "summary": "视频补帧",
+    "reads": true,
+    "writes": true
+  },
+  {
+    "path": "node interpolate video",
+    "summary": "后编辑：提交即执行，无 --run；等待终态直接使用 --wait",
+    "reads": true,
+    "writes": true,
+    "flags": [
+      "--project-id",
+      "--node-id",
+      "--submit-id",
+      "--title",
+      "--credit-token",
+      "--credit-ceiling",
+      "--wait",
+      "--timeout",
+      "--interval",
+      "--dry-run",
+      "--fps"
+    ]
+  },
+  {
+    "path": "node promote",
+    "summary": "将样片生成为正片",
+    "reads": true,
+    "writes": true
+  },
+  {
+    "path": "node promote video-sample",
+    "summary": "样片转正片：报价并批准后生成新节点",
+    "reads": true,
+    "writes": true,
+    "flags": [
+      "--project-id",
+      "--node-id",
+      "--resolution",
+      "--submit-id",
+      "--title",
+      "--credit-token",
+      "--credit-ceiling",
+      "--wait",
+      "--timeout",
+      "--interval",
+      "--dry-run"
+    ]
+  },
+  {
+    "path": "node delete",
+    "summary": "确认后批量删除节点；暂不支持群组",
+    "reads": true,
+    "writes": true,
+    "flags": [
+      "--project-id",
+      "--node-id",
+      "--update-id",
+      "--delete-token"
+    ]
+  },
+  {
+    "path": "node delete confirm",
+    "summary": "明确批准指定批次，签发删除凭证；不删除节点",
+    "reads": true,
+    "writes": true,
+    "flags": [
+      "--project-id",
+      "--node-id",
+      "--update-id"
+    ]
+  },
+  {
+    "path": "node delete status",
+    "summary": "只读查询该批次首次删除结果；不签发凭证、不删除节点",
+    "reads": true,
+    "writes": false,
+    "flags": [
+      "--project-id",
+      "--node-id",
+      "--update-id"
+    ]
+  },
+  {
+    "path": "node show",
+    "summary": "读取给定节点的视图",
+    "reads": true,
+    "writes": false,
+    "flags": [
+      "--project-id",
+      "--node-id"
+    ]
+  },
+  {
+    "path": "node find",
+    "summary": "按条件查节点，只回定位摘要（nodeId/type/title/status/tags）",
+    "reads": true,
+    "writes": false,
+    "flags": [
+      "--project-id",
+      "--name",
+      "--type",
+      "--status",
+      "--tag",
+      "--limit",
+      "--offset"
+    ]
+  },
+  {
+    "path": "node quote",
+    "summary": "对给定节点做运行前积分预估",
+    "reads": true,
+    "writes": false,
+    "flags": [
+      "--project-id",
+      "--node-id"
+    ]
+  },
+  {
+    "path": "node confirm",
+    "summary": "批准给定节点的积分消费上限并取回短期凭证",
+    "reads": true,
+    "writes": true,
+    "flags": [
+      "--project-id",
+      "--node-id",
+      "--credit-ceiling"
+    ]
+  },
+  {
+    "path": "node run",
+    "summary": "触发给定节点的运行",
+    "reads": true,
+    "writes": true,
+    "flags": [
+      "--project-id",
+      "--node-id",
+      "--submit-id",
+      "--credit-token"
+    ]
+  },
+  {
+    "path": "operation",
+    "summary": "查询或等待可恢复操作",
+    "reads": true,
+    "writes": false
+  },
+  {
+    "path": "operation status",
+    "summary": "查询一次生成操作状态",
+    "reads": true,
+    "writes": false,
+    "arguments": [
+      "operation-ref"
+    ],
+    "flags": [
+      "--project-id"
+    ]
+  },
+  {
+    "path": "operation wait",
+    "summary": "等待生成操作进入终态",
+    "reads": true,
+    "writes": false,
+    "arguments": [
+      "operation-ref"
+    ],
+    "flags": [
+      "--project-id",
+      "--timeout",
+      "--interval"
+    ]
+  },
+  {
+    "path": "resource",
+    "summary": "查询、上传与下载画布素材",
+    "reads": true,
+    "writes": true
+  },
+  {
+    "path": "resource download",
+    "summary": "安全下载成功的图片素材",
+    "reads": true,
+    "writes": false,
+    "arguments": [
+      "resource-id"
+    ],
+    "flags": [
+      "--project-id",
+      "--output"
+    ]
+  },
+  {
+    "path": "resource get",
+    "summary": "查素材状态与稳定事实（running/success/failed/canceled 四态都可查）",
+    "reads": true,
+    "writes": false,
+    "arguments": [
+      "resource-id"
+    ],
+    "flags": [
+      "--project-id"
+    ]
+  },
+  {
+    "path": "resource upload",
+    "summary": "上传本地图片、视频或音频并登记为项目资源",
+    "reads": false,
+    "writes": true,
+    "flags": [
+      "--file",
+      "--type",
+      "--source-url",
+      "--project-id",
+      "--resource-id",
+      "--name",
+      "--import-kind"
+    ]
+  },
+  {
+    "path": "director",
+    "summary": "导演台创作、同步与导出",
+    "reads": true,
+    "writes": true,
+    "detailCommand": "dreamina-canvas schema director"
+  },
+  {
+    "path": "canvas",
+    "summary": "管理画布",
+    "reads": true,
+    "writes": true
+  },
+  {
+    "path": "canvas create",
+    "summary": "创建画布",
+    "reads": false,
+    "writes": true,
+    "arguments": [
+      "name"
+    ],
+    "flags": [
+      "--project-id",
+      "--use"
+    ]
+  },
+  {
+    "path": "canvas ls",
+    "summary": "列举可访问的画布，只回定位摘要（projectId/name/createdAt/updatedAt/webUrl）",
+    "reads": true,
+    "writes": false,
+    "flags": [
+      "--limit",
+      "--cursor"
+    ]
+  },
+  {
+    "path": "canvas use",
+    "summary": "核验权限并选择当前画布",
+    "reads": true,
+    "writes": true,
+    "arguments": [
+      "project-id"
+    ]
+  },
+  {
+    "path": "canvas current",
+    "summary": "查询当前画布和实时权限",
+    "reads": true,
+    "writes": false
+  },
+  {
+    "path": "auth",
+    "summary": "管理登录与认证态",
+    "reads": true,
+    "writes": true
+  },
+  {
+    "path": "auth account",
+    "summary": "读取服务端认证的当前账号",
+    "reads": true,
+    "writes": false
+  },
+  {
+    "path": "auth login",
+    "summary": "启动设备授权登录",
+    "reads": true,
+    "writes": true,
+    "flags": [
+      "--force"
+    ]
+  },
+  {
+    "path": "auth logout",
+    "summary": "清除当前 profile 的本地登录态",
+    "reads": true,
+    "writes": true
+  },
+  {
+    "path": "auth status",
+    "summary": "读取本地登录状态",
+    "reads": true,
+    "writes": false
+  },
+  {
+    "path": "auth wait",
+    "summary": "等待已启动的设备授权完成",
+    "reads": true,
+    "writes": true,
+    "flags": [
+      "--device-code",
+      "--timeout"
+    ]
+  },
+  {
+    "path": "auth refresh",
+    "summary": "刷新当前登录凭据",
+    "reads": true,
+    "writes": true
+  },
+  {
+    "path": "schema",
+    "summary": "返回当前制品的命令契约",
+    "reads": true,
+    "writes": false
+  },
+  {
+    "path": "version",
+    "summary": "返回版本和构建信息",
+    "reads": true,
+    "writes": false
+  },
+  {
+    "path": "team",
+    "summary": "发现可用团队",
+    "reads": true,
+    "writes": false
+  },
+  {
+    "path": "team ls",
+    "summary": "查看团队及订阅积分信息",
+    "reads": true,
+    "writes": false,
+    "flags": [
+      "--limit",
+      "--cursor"
+    ]
+  },
+  {
+    "path": "space",
+    "summary": "选择个人或团队空间",
+    "reads": true,
+    "writes": true
+  },
+  {
+    "path": "space use",
+    "summary": "核验并显式切换空间",
+    "reads": true,
+    "writes": true,
+    "arguments": [
+      "kind",
+      "team-id"
+    ]
+  },
+  {
+    "path": "space current",
+    "summary": "查询当前空间和已选画布的实时权限",
+    "reads": true,
+    "writes": false
+  },
+  {
+    "path": "director",
+    "summary": "导演台创作、同步与导出",
+    "reads": true,
+    "writes": true
+  },
+  {
+    "path": "director create",
+    "summary": "在画布上创建导演台节点",
+    "reads": true,
+    "writes": true,
+    "flags": [
+      "--file",
+      "--project-id",
+      "--title"
+    ]
+  },
+  {
+    "path": "director pull",
+    "summary": "读取画布导演台到新文件",
+    "reads": true,
+    "writes": false,
+    "flags": [
+      "--file",
+      "--project-id",
+      "--node-id",
+      "--version-id"
+    ]
+  },
+  {
+    "path": "director show",
+    "summary": "查看并校验画布或本地场景",
+    "reads": true,
+    "writes": false,
+    "flags": [
+      "--file",
+      "--project-id",
+      "--node-id"
+    ]
+  },
+  {
+    "path": "director apply",
+    "summary": "原子应用场景、镜头、姿势、动画或分镜命令",
+    "reads": true,
+    "writes": true,
+    "flags": [
+      "--file",
+      "--project-id",
+      "--node-id",
+      "--input"
+    ]
+  },
+  {
+    "path": "director push",
+    "summary": "保存正文并原子更新画布版本",
+    "reads": true,
+    "writes": true,
+    "flags": [
+      "--file",
+      "--project-id",
+      "--force"
+    ]
+  },
+  {
+    "path": "director catalog",
+    "summary": "发现内置几何体、预设、人物或动作",
+    "reads": true,
+    "writes": false,
+    "flags": [
+      "--kind",
+      "--offset",
+      "--count"
+    ]
+  },
+  {
+    "path": "director export",
+    "summary": "导出截图或视频（需本机浏览器）或 FBX 动作",
+    "reads": true,
+    "writes": true,
+    "flags": [
+      "--file",
+      "--project-id",
+      "--node-id",
+      "--output",
+      "--workspace",
+      "--camera-id",
+      "--storyboard",
+      "--frame",
+      "--long-edge",
+      "--type",
+      "--motion-id",
+      "--to-canvas"
+    ]
+  },
+  {
+    "path": "director freeze",
+    "summary": "把动画帧定格到摆拍（需本机浏览器）",
+    "reads": true,
+    "writes": false,
+    "flags": [
+      "--file",
+      "--frame"
+    ]
+  },
+  {
+    "path": "director preview",
+    "summary": "查看当前镜头或分镜帧的截图（需本机浏览器）",
+    "reads": true,
+    "writes": false,
+    "flags": [
+      "--file",
+      "--project-id",
+      "--node-id",
+      "--output",
+      "--workspace",
+      "--camera-id",
+      "--storyboard",
+      "--frame",
+      "--long-edge"
+    ]
+  },
+  {
+    "path": "director resume-export",
+    "summary": "恢复中断的画布导出",
+    "reads": true,
+    "writes": true,
+    "flags": [
+      "--operation-ref"
+    ]
+  }
+]

@@ -1,0 +1,39 @@
+用法：
+  dreamina-canvas node create audio [flags]
+
+参数：
+      --clear-tags                    把节点标签完整集合清空
+      --credit-ceiling int            批准的积分消费上限；--run 时报价超过它会在运行前停止
+      --credit-token string           已批准的 creditConfirmationToken；--run 时使用
+      --dry-run                       只做本地校验并输出计划；不连接服务端、不写草稿、不报价或扣分
+      --duration float                music 模式时长（秒） (default 30)
+  -h, --help                          显示 dreamina-canvas node create audio 的帮助
+      --import-kind string            节点导入类别：local_upload（挂本地上传登记的资源）或 external_generated（外部平台生成产物导入）；与 resource upload 的登记意图同一套词汇
+      --interval duration             --wait 的轮询间隔；默认 5s (default 5s)
+      --mode string                   音频生成模式：tts（text-to-speech，文本转语音）或 music（音乐生成） (default "tts")
+      --model string                  music 必填；tts 按模型目录选择是否需要 --scenario；从 model list --type audio 选择
+      --node-id string                稳定 node_id；省略时生成
+      --project-id string             项目 UUID；省略时使用当前项目
+      --prompt string                 TTS 文本或音乐描述
+      --ref strings                   全能配音参考素材：node:<id> 或 res:<id>，可重复
+      --resource-id strings           本节点已有产物的资源 UUID，可重复传入；需同时提供 --import-kind local_upload 或 external_generated。多个视为同一批次内的候选，顺序即候选顺序，首个为主选。资源须已登记、状态成功且类型为音频
+      --resource-source stringArray   跨项目资源来源：<资源 UUID>@<来源项目 UUID>；可重复，仅声明本次保存使用的资源
+      --run                           保存后依次报价、批准并运行该节点
+      --scenario string               模型场景：text-reading（朗读）或 omni-dubbing（全能配音）
+      --submit-id string              稳定提交 UUID；--run 或 --resource-id 时省略则生成，停顿后续跑或重试导入须复用它
+      --tag strings                   颜色标签 ID，可重复传入；取值 default-tag-1..default-tag-5，除非用户明确指定标签否则不要默认传
+      --timeout duration              --wait 的最长等待时间；默认 10m，0 表示只查询一次 (default 10m0s)
+      --title string                  节点标题；按 flag 出现更新
+      --update-id string              稳定更新 UUID；省略时生成
+      --voice-id string               公共目录音色 ID；从同模型 voice list 选择，与 --voice-name 互斥
+      --voice-name string             音色名称；从 voice list 选择；全能配音可选一个音色作为音频参考
+      --wait                          --run 后等待该节点生成进入终态
+      --x float                       节点左上角 X；组内为父组相对坐标；与 --y 成组提供
+      --y float                       节点左上角 Y；组内为父组相对坐标；与 --x 成组提供
+
+全局参数：
+      --format string     输出格式：json 或 table
+      --non-interactive   禁用交互提示
+      --profile string    本地登录态隔离名称 (default "default")
+      --region string     产品区域：cn；缺省 cn (default "cn")
+      --yes               确认策略允许由参数确认的操作

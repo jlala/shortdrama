@@ -1,0 +1,24 @@
+{
+  "ok": true,
+  "exitCode": 0,
+  "returnedFieldPaths": [
+    "data.displayName",
+    "data.availableCredits",
+    "data.credits",
+    "data.credits.available",
+    "data.credits.details",
+    "data.credits.details[].available",
+    "data.credits.details[].expiresAt",
+    "data.userId",
+    "data.isVip",
+    "data.vipLevelStartsAt",
+    "data.vipLevelExpiresAt",
+    "data.vipLevel",
+    "data.teamSpaceDiscovery",
+    "data.teamSpaceDiscovery.status",
+    "data.teamSpaceDiscovery.hasTeamSpace",
+    "data.teamSpaceDiscovery.teams",
+    "data.teamSpaceDiscovery.requestId"
+  ],
+  "error": null
+}

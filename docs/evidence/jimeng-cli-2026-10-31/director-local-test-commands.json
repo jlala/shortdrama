@@ -1,0 +1,73 @@
+[
+  {
+    "type": "workspace.performance",
+    "copyStaging": true
+  },
+  {
+    "type": "object.primitive",
+    "primitive": "cube",
+    "id": "cli-check-cube",
+    "name": "CLI本地核验方块"
+  },
+  {
+    "type": "object.set",
+    "id": "cli-check-cube",
+    "patch": {
+      "transform": {
+        "position": {
+          "x": 0,
+          "y": 0.5,
+          "z": 0
+        },
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 0.5,
+          "y": 0.5,
+          "z": 0.5
+        }
+      }
+    }
+  },
+  {
+    "type": "timeline.set",
+    "fps": 24,
+    "durationFrames": 48,
+    "loop": false
+  },
+  {
+    "type": "keyframe.set",
+    "id": "cli-check-cube",
+    "channel": "position.x",
+    "frame": 0,
+    "value": -0.5,
+    "interpolation": "linear"
+  },
+  {
+    "type": "keyframe.set",
+    "id": "cli-check-cube",
+    "channel": "position.x",
+    "frame": 48,
+    "value": 0.5,
+    "interpolation": "linear"
+  },
+  {
+    "type": "camera.keyframe",
+    "id": "scene-camera",
+    "channel": "position.z",
+    "frame": 0,
+    "value": 7,
+    "interpolation": "linear"
+  },
+  {
+    "type": "camera.keyframe",
+    "id": "scene-camera",
+    "channel": "position.z",
+    "frame": 48,
+    "value": 6,
+    "interpolation": "linear"
+  }
+]

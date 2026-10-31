@@ -1,0 +1,5077 @@
+{
+  "schemaVersion": "1",
+  "ok": true,
+  "data": {
+    "commandFields": {
+      "motion.import-fbx": {
+        "id": {
+          "type": "string",
+          "required": true,
+          "shape": "New local motion library id"
+        },
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "contentBase64": {
+          "type": "string",
+          "required": true,
+          "shape": "Base64 FBX file content"
+        },
+        "animationStackIndex": {
+          "type": "number",
+          "required": false
+        },
+        "locomotionMode": {
+          "type": "string",
+          "required": false,
+          "values": [
+            "embedded",
+            "in-place"
+          ]
+        }
+      },
+      "motion.import": {
+        "id": {
+          "type": "string",
+          "required": true,
+          "shape": "New local motion library id"
+        },
+        "file": {
+          "type": "json",
+          "required": true,
+          "shape": "octo-director-motion JSON file object"
+        }
+      },
+      "motion.remove": {
+        "id": {
+          "type": "string",
+          "required": true,
+          "shape": "Unreferenced local motion library id"
+        }
+      },
+      "document.title": {
+        "title": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "workspace.select": {
+        "workspace": {
+          "type": "string",
+          "required": true,
+          "values": [
+            "staging",
+            "performance"
+          ]
+        }
+      },
+      "workspace.performance": {
+        "copyStaging": {
+          "type": "boolean",
+          "required": true,
+          "shape": "true copies the staging scene into a new performance workspace"
+        }
+      },
+      "object.add": {
+        "object": {
+          "type": "object",
+          "required": true,
+          "shape": "One portable object as in show objects; resources carry stable ids only"
+        }
+      },
+      "object.primitive": {
+        "primitive": {
+          "type": "string",
+          "required": true,
+          "shape": "One of catalog primitives"
+        },
+        "id": {
+          "type": "string",
+          "required": true,
+          "shape": "New object id"
+        },
+        "name": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "object.preset": {
+        "preset": {
+          "type": "string",
+          "required": true,
+          "shape": "One of catalog presets[].id"
+        },
+        "id": {
+          "type": "string",
+          "required": true,
+          "shape": "New object id"
+        },
+        "name": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "object.set": {
+        "id": {
+          "type": "string",
+          "required": true,
+          "shape": "Existing object id from show"
+        },
+        "patch": {
+          "type": "object",
+          "required": true,
+          "shape": "Partial object with name, visible, opacity, color, transform, intrinsicGeometry, light, background, pathFacingEnabled; structures as in show objects"
+        }
+      },
+      "object.duplicate": {
+        "id": {
+          "type": "string",
+          "required": true,
+          "shape": "Existing object id from show"
+        },
+        "newId": {
+          "type": "string",
+          "required": true
+        },
+        "name": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "object.delete": {
+        "ids": {
+          "type": "string[]",
+          "required": true,
+          "shape": "Existing object ids"
+        }
+      },
+      "object.ground": {
+        "ids": {
+          "type": "string[]",
+          "required": true,
+          "shape": "Existing object ids"
+        }
+      },
+      "group.create": {
+        "id": {
+          "type": "string",
+          "required": true,
+          "shape": "New group id"
+        },
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "ids": {
+          "type": "string[]",
+          "required": true,
+          "shape": "Existing object ids"
+        }
+      },
+      "group.delete": {
+        "id": {
+          "type": "string",
+          "required": true,
+          "shape": "Existing group id"
+        }
+      },
+      "camera.add": {
+        "camera": {
+          "type": "object",
+          "required": true,
+          "shape": "{id, name, outputPolicy: preserve|select-new} plus one of: {presetId: 'current-view', currentView: {position, target, fov, roll, aspectRatio}}; {presetId: front-medium|front-close-up|front-wide|side-follow|side-close|rear-medium|high-angle-wide|three-quarter-high-angle|low-angle-up|low-angle-wide|birds-eye|dutch-angle, target: {objectId, center: {x, y, z}, height, width?, yawDegrees}}; {presetId: 'over-shoulder', foregroundTarget: <same as target>, targetPoint: {x, y, z}}"
+        }
+      },
+      "camera.set": {
+        "id": {
+          "type": "string",
+          "required": true,
+          "shape": "Existing camera id from show"
+        },
+        "patch": {
+          "type": "object",
+          "required": true,
+          "shape": "Partial {position: {x, y, z}, target: {x, y, z}, fov, roll, aspectRatio}"
+        },
+        "name": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "camera.duplicate": {
+        "id": {
+          "type": "string",
+          "required": true,
+          "shape": "Existing camera id from show"
+        },
+        "newId": {
+          "type": "string",
+          "required": true
+        },
+        "name": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "camera.delete": {
+        "id": {
+          "type": "string",
+          "required": true,
+          "shape": "Existing camera id from show"
+        }
+      },
+      "camera.output": {
+        "id": {
+          "type": "string",
+          "required": true,
+          "shape": "Existing camera id from show"
+        }
+      },
+      "environment.set": {
+        "environment": {
+          "type": "object",
+          "required": true,
+          "shape": "Complete environment settings as in show"
+        }
+      },
+      "pose.set": {
+        "joints": {
+          "type": "object",
+          "required": true,
+          "shape": "Complete static joint transform map keyed by joint name; {} resets"
+        }
+      },
+      "timeline.set": {
+        "fps": {
+          "type": "number",
+          "required": false
+        },
+        "durationFrames": {
+          "type": "number",
+          "required": false,
+          "shape": "Cannot cut existing content"
+        },
+        "loop": {
+          "type": "boolean",
+          "required": false
+        }
+      },
+      "motion.add": {
+        "clip": {
+          "type": "object",
+          "required": true,
+          "shape": "Portable motion clip as in show, with a motion identity or custom-pose snapshot"
+        }
+      },
+      "motion.duplicate": {
+        "id": {
+          "type": "string",
+          "required": true,
+          "shape": "Existing motion clip id from show"
+        },
+        "newId": {
+          "type": "string",
+          "required": true
+        },
+        "frame": {
+          "type": "number",
+          "required": true
+        }
+      },
+      "motion.transition": {
+        "id": {
+          "type": "string",
+          "required": true,
+          "shape": "Existing motion clip id from show"
+        },
+        "frames": {
+          "type": "number",
+          "required": true
+        }
+      },
+      "camera.keyframe.delete": {
+        "id": {
+          "type": "string",
+          "required": true,
+          "shape": "Existing camera id from show"
+        },
+        "channel": {
+          "type": "string",
+          "required": true,
+          "values": [
+            "position.x",
+            "position.y",
+            "position.z",
+            "target.x",
+            "target.y",
+            "target.z",
+            "lens.fov",
+            "lens.roll"
+          ]
+        },
+        "keyframeId": {
+          "type": "string",
+          "required": true,
+          "shape": "Existing keyframe id from show"
+        }
+      },
+      "motion.delete": {
+        "id": {
+          "type": "string",
+          "required": true,
+          "shape": "Existing motion clip id from show"
+        }
+      },
+      "motion.move": {
+        "id": {
+          "type": "string",
+          "required": true,
+          "shape": "Existing motion clip id from show"
+        },
+        "frame": {
+          "type": "number",
+          "required": true
+        }
+      },
+      "motion.resize": {
+        "id": {
+          "type": "string",
+          "required": true,
+          "shape": "Existing motion clip id from show"
+        },
+        "edge": {
+          "type": "string",
+          "required": true,
+          "values": [
+            "start",
+            "end"
+          ]
+        },
+        "frame": {
+          "type": "number",
+          "required": true
+        }
+      },
+      "motion.playback": {
+        "id": {
+          "type": "string",
+          "required": true,
+          "shape": "Existing motion clip id from show"
+        },
+        "speed": {
+          "type": "number",
+          "required": false
+        },
+        "loop": {
+          "type": "boolean",
+          "required": false
+        }
+      },
+      "keyframe.set": {
+        "id": {
+          "type": "string",
+          "required": true,
+          "shape": "Existing object id from show"
+        },
+        "channel": {
+          "type": "string",
+          "required": true,
+          "values": [
+            "position.x",
+            "position.y",
+            "position.z",
+            "rotation.x",
+            "rotation.y",
+            "rotation.z",
+            "scale.x",
+            "scale.y",
+            "scale.z"
+          ]
+        },
+        "frame": {
+          "type": "number",
+          "required": true
+        },
+        "value": {
+          "type": "number",
+          "required": true
+        },
+        "interpolation": {
+          "type": "string",
+          "required": false,
+          "values": [
+            "linear",
+            "smooth",
+            "hold"
+          ]
+        },
+        "tangents": {
+          "type": "object",
+          "required": false,
+          "shape": "Property tangents {mode: free|aligned|vector, in?: {frameDelta, valueDelta}, out?: {frameDelta, valueDelta}}"
+        },
+        "spatialTangents": {
+          "type": "object",
+          "required": false,
+          "shape": "Spatial tangents {mode: auto|aligned|free|linear, in?: {x, y, z}, out?: {x, y, z}}; position channels only"
+        }
+      },
+      "camera.keyframe": {
+        "id": {
+          "type": "string",
+          "required": true,
+          "shape": "Existing camera id from show"
+        },
+        "channel": {
+          "type": "string",
+          "required": true,
+          "values": [
+            "position.x",
+            "position.y",
+            "position.z",
+            "target.x",
+            "target.y",
+            "target.z",
+            "lens.fov",
+            "lens.roll"
+          ]
+        },
+        "frame": {
+          "type": "number",
+          "required": true
+        },
+        "value": {
+          "type": "number",
+          "required": true
+        },
+        "interpolation": {
+          "type": "string",
+          "required": false,
+          "values": [
+            "linear",
+            "smooth",
+            "hold"
+          ]
+        },
+        "tangents": {
+          "type": "object",
+          "required": false,
+          "shape": "Property tangents {mode: free|aligned|vector, in?: {frameDelta, valueDelta}, out?: {frameDelta, valueDelta}}"
+        },
+        "spatialTangents": {
+          "type": "object",
+          "required": false,
+          "shape": "Spatial tangents {mode: auto|aligned|free|linear, in?: {x, y, z}, out?: {x, y, z}}; position channels only"
+        }
+      },
+      "keyframe.delete": {
+        "id": {
+          "type": "string",
+          "required": true,
+          "shape": "Existing object id from show"
+        },
+        "channel": {
+          "type": "string",
+          "required": true,
+          "values": [
+            "position.x",
+            "position.y",
+            "position.z",
+            "rotation.x",
+            "rotation.y",
+            "rotation.z",
+            "scale.x",
+            "scale.y",
+            "scale.z"
+          ]
+        },
+        "keyframeId": {
+          "type": "string",
+          "required": true,
+          "shape": "Existing keyframe id from show"
+        }
+      },
+      "storyboard.add": {
+        "id": {
+          "type": "string",
+          "required": true,
+          "shape": "New storyboard shot id"
+        },
+        "cameraId": {
+          "type": "string",
+          "required": true,
+          "shape": "Existing camera id from show"
+        },
+        "durationFrames": {
+          "type": "number",
+          "required": true
+        }
+      },
+      "storyboard.trim": {
+        "id": {
+          "type": "string",
+          "required": true,
+          "shape": "Existing storyboard shot id from show"
+        },
+        "durationFrames": {
+          "type": "number",
+          "required": true
+        }
+      },
+      "storyboard.move": {
+        "id": {
+          "type": "string",
+          "required": true,
+          "shape": "Existing storyboard shot id from show"
+        },
+        "index": {
+          "type": "number",
+          "required": true,
+          "shape": "Zero-based target position"
+        }
+      },
+      "storyboard.delete": {
+        "id": {
+          "type": "string",
+          "required": true,
+          "shape": "Existing storyboard shot id from show"
+        }
+      }
+    },
+    "commands": [
+      "motion.import-fbx",
+      "motion.import",
+      "motion.remove",
+      "document.title",
+      "workspace.select",
+      "workspace.performance",
+      "object.add",
+      "object.primitive",
+      "object.preset",
+      "object.set",
+      "object.duplicate",
+      "object.delete",
+      "object.ground",
+      "group.create",
+      "group.delete",
+      "camera.add",
+      "camera.set",
+      "camera.duplicate",
+      "camera.delete",
+      "camera.output",
+      "environment.set",
+      "pose.set",
+      "timeline.set",
+      "motion.add",
+      "motion.duplicate",
+      "motion.transition",
+      "camera.keyframe.delete",
+      "motion.delete",
+      "motion.move",
+      "motion.resize",
+      "motion.playback",
+      "keyframe.set",
+      "camera.keyframe",
+      "keyframe.delete",
+      "storyboard.add",
+      "storyboard.trim",
+      "storyboard.move",
+      "storyboard.delete"
+    ],
+    "presets": [
+      {
+        "presetId": "chair",
+        "presetVersion": 1,
+        "name": "Chair",
+        "category": "Furniture",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "seatWidth",
+          "seatHeight",
+          "seatDepth"
+        ],
+        "defaultSizeMeters": {
+          "width": 0.48,
+          "height": 0.9,
+          "depth": 0.52
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.24,
+            "y": 0,
+            "z": -0.26
+          },
+          "max": {
+            "x": 0.24,
+            "y": 0.9,
+            "z": 0.26
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.45,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.9,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "round-stool",
+        "presetVersion": 1,
+        "name": "Round Stool",
+        "category": "Furniture",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "seatDiameter",
+          "seatHeight"
+        ],
+        "defaultSizeMeters": {
+          "width": 0.38,
+          "height": 0.48,
+          "depth": 0.38
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.19,
+            "y": 0,
+            "z": -0.19
+          },
+          "max": {
+            "x": 0.19,
+            "y": 0.48,
+            "z": 0.19
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.24,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.48,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "armchair",
+        "presetVersion": 1,
+        "name": "Armchair",
+        "category": "Furniture",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "seatWidth",
+          "seatHeight",
+          "seatDepth"
+        ],
+        "defaultSizeMeters": {
+          "width": 0.82,
+          "height": 0.88,
+          "depth": 0.82
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.41,
+            "y": 0,
+            "z": -0.41
+          },
+          "max": {
+            "x": 0.41,
+            "y": 0.88,
+            "z": 0.41
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.44,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.88,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "sofa",
+        "presetVersion": 1,
+        "name": "Sofa",
+        "category": "Furniture",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "seatWidth",
+          "seatHeight",
+          "seatDepth"
+        ],
+        "defaultSizeMeters": {
+          "width": 1.9,
+          "height": 0.88,
+          "depth": 0.86
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.95,
+            "y": 0,
+            "z": -0.43
+          },
+          "max": {
+            "x": 0.95,
+            "y": 0.88,
+            "z": 0.43
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.44,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.88,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "square-table",
+        "presetVersion": 1,
+        "name": "Square Table",
+        "category": "Furniture",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "tabletopWidth",
+          "tabletopHeight",
+          "tabletopDepth"
+        ],
+        "defaultSizeMeters": {
+          "width": 0.9,
+          "height": 0.75,
+          "depth": 0.9
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.45,
+            "y": 0,
+            "z": -0.45
+          },
+          "max": {
+            "x": 0.45,
+            "y": 0.75,
+            "z": 0.45
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.375,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.75,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "long-table",
+        "presetVersion": 1,
+        "name": "Long Table",
+        "category": "Furniture",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "tabletopWidth",
+          "tabletopHeight",
+          "tabletopDepth"
+        ],
+        "defaultSizeMeters": {
+          "width": 1.8,
+          "height": 0.75,
+          "depth": 0.9
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.9,
+            "y": 0,
+            "z": -0.45
+          },
+          "max": {
+            "x": 0.9,
+            "y": 0.75,
+            "z": 0.45
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.375,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.75,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "round-table",
+        "presetVersion": 1,
+        "name": "Round Table",
+        "category": "Furniture",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "tabletopDiameter",
+          "tabletopHeight"
+        ],
+        "defaultSizeMeters": {
+          "width": 1.05,
+          "height": 0.75,
+          "depth": 1.05
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.525,
+            "y": 0,
+            "z": -0.525
+          },
+          "max": {
+            "x": 0.525,
+            "y": 0.75,
+            "z": 0.525
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.375,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.75,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "bed",
+        "presetVersion": 1,
+        "name": "Bed",
+        "category": "Furniture",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "bedWidth",
+          "bedHeight",
+          "bedLength"
+        ],
+        "defaultSizeMeters": {
+          "width": 1.5,
+          "height": 0.55,
+          "depth": 2.05
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.75,
+            "y": 0,
+            "z": -1.025
+          },
+          "max": {
+            "x": 0.75,
+            "y": 0.55,
+            "z": 1.025
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.275,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.55,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "bookshelf",
+        "presetVersion": 1,
+        "name": "Bookshelf",
+        "category": "Furniture",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "width",
+          "height",
+          "depth"
+        ],
+        "defaultSizeMeters": {
+          "width": 0.9,
+          "height": 1.8,
+          "depth": 0.3
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.45,
+            "y": 0,
+            "z": -0.15
+          },
+          "max": {
+            "x": 0.45,
+            "y": 1.8,
+            "z": 0.15
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.9,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 1.8,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "low-cabinet",
+        "presetVersion": 1,
+        "name": "Low Cabinet",
+        "category": "Furniture",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "width",
+          "height",
+          "depth"
+        ],
+        "defaultSizeMeters": {
+          "width": 1.2,
+          "height": 0.72,
+          "depth": 0.42
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.6,
+            "y": 0,
+            "z": -0.21
+          },
+          "max": {
+            "x": 0.6,
+            "y": 0.72,
+            "z": 0.21
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.36,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.72,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "wardrobe",
+        "presetVersion": 1,
+        "name": "Wardrobe",
+        "category": "Furniture",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "width",
+          "height",
+          "depth"
+        ],
+        "defaultSizeMeters": {
+          "width": 1.2,
+          "height": 2,
+          "depth": 0.58
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.6,
+            "y": 0,
+            "z": -0.29
+          },
+          "max": {
+            "x": 0.6,
+            "y": 2,
+            "z": 0.29
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 1,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 2,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "television",
+        "presetVersion": 1,
+        "name": "TV",
+        "category": "Furniture",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "screenWidth",
+          "screenHeight"
+        ],
+        "defaultSizeMeters": {
+          "width": 1.1,
+          "height": 0.68,
+          "depth": 0.12
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.55,
+            "y": 0,
+            "z": -0.06
+          },
+          "max": {
+            "x": 0.55,
+            "y": 0.68,
+            "z": 0.06
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.34,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.68,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "wall-television",
+        "presetVersion": 1,
+        "name": "Wall-mounted TV",
+        "category": "Furniture",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "screenWidth",
+          "screenHeight"
+        ],
+        "defaultSizeMeters": {
+          "width": 1.2,
+          "height": 0.7,
+          "depth": 0.08
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.6,
+            "y": 0,
+            "z": -0.04
+          },
+          "max": {
+            "x": 0.6,
+            "y": 0.7,
+            "z": 0.04
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.35,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.7,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "floor-lamp",
+        "presetVersion": 1,
+        "name": "Floor Lamp",
+        "category": "Furniture",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "diameter",
+          "lampHeight"
+        ],
+        "defaultSizeMeters": {
+          "width": 0.45,
+          "height": 1.65,
+          "depth": 0.45
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.225,
+            "y": 0,
+            "z": -0.225
+          },
+          "max": {
+            "x": 0.225,
+            "y": 1.65,
+            "z": 0.225
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.825,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 1.65,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "table-lamp",
+        "presetVersion": 1,
+        "name": "Table Lamp",
+        "category": "Furniture",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "diameter",
+          "lampHeight"
+        ],
+        "defaultSizeMeters": {
+          "width": 0.28,
+          "height": 0.5,
+          "depth": 0.28
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.14,
+            "y": 0,
+            "z": -0.14
+          },
+          "max": {
+            "x": 0.14,
+            "y": 0.5,
+            "z": 0.14
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.25,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.5,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "rug",
+        "presetVersion": 1,
+        "name": "Rug",
+        "category": "Furniture",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "rugWidth",
+          "rugLength"
+        ],
+        "defaultSizeMeters": {
+          "width": 1.6,
+          "height": 0.02,
+          "depth": 2.3
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.8,
+            "y": 0,
+            "z": -1.15
+          },
+          "max": {
+            "x": 0.8,
+            "y": 0.02,
+            "z": 1.15
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.01,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.02,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "wall-segment",
+        "presetVersion": 1,
+        "name": "Wall",
+        "category": "Architecture",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "wallLength",
+          "wallHeight",
+          "wallThickness"
+        ],
+        "defaultSizeMeters": {
+          "width": 3,
+          "height": 2.6,
+          "depth": 0.18
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -1.5,
+            "y": 0,
+            "z": -0.09
+          },
+          "max": {
+            "x": 1.5,
+            "y": 2.6,
+            "z": 0.09
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 1.3,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 2.6,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "column",
+        "presetVersion": 1,
+        "name": "Column",
+        "category": "Architecture",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "diameter",
+          "height"
+        ],
+        "defaultSizeMeters": {
+          "width": 0.4,
+          "height": 2.8,
+          "depth": 0.4
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.2,
+            "y": 0,
+            "z": -0.2
+          },
+          "max": {
+            "x": 0.2,
+            "y": 2.8,
+            "z": 0.2
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 1.4,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 2.8,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "stairs",
+        "presetVersion": 1,
+        "name": "Stairs",
+        "category": "Architecture",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "stairWidth",
+          "stairRise",
+          "stairRun"
+        ],
+        "defaultSizeMeters": {
+          "width": 2,
+          "height": 1.5,
+          "depth": 3
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -1,
+            "y": 0,
+            "z": -1.5
+          },
+          "max": {
+            "x": 1,
+            "y": 1.5,
+            "z": 1.5
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.75,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 1.5,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "ramp",
+        "presetVersion": 1,
+        "name": "Ramp",
+        "category": "Architecture",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "rampWidth",
+          "rampRise",
+          "rampRun"
+        ],
+        "defaultSizeMeters": {
+          "width": 2,
+          "height": 0.8,
+          "depth": 3
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -1,
+            "y": 0,
+            "z": -1.5
+          },
+          "max": {
+            "x": 1,
+            "y": 0.8,
+            "z": 1.5
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.4,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.8,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "platform",
+        "presetVersion": 1,
+        "name": "Platform",
+        "category": "Architecture",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "width",
+          "height",
+          "depth"
+        ],
+        "defaultSizeMeters": {
+          "width": 2.4,
+          "height": 0.3,
+          "depth": 2.4
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -1.2,
+            "y": 0,
+            "z": -1.2
+          },
+          "max": {
+            "x": 1.2,
+            "y": 0.3,
+            "z": 1.2
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.15,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.3,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "archway",
+        "presetVersion": 1,
+        "name": "Archway",
+        "category": "Architecture",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "openingWidth",
+          "openingHeight",
+          "thickness"
+        ],
+        "defaultSizeMeters": {
+          "width": 2.5,
+          "height": 2.6,
+          "depth": 0.35
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -1.25,
+            "y": 0,
+            "z": -0.175
+          },
+          "max": {
+            "x": 1.25,
+            "y": 2.6,
+            "z": 0.175
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 1.3,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 2.6,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "door",
+        "presetVersion": 1,
+        "name": "Door",
+        "category": "Architecture",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "openingWidth",
+          "openingHeight",
+          "thickness"
+        ],
+        "defaultSizeMeters": {
+          "width": 1,
+          "height": 2.1,
+          "depth": 0.12
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.5,
+            "y": 0,
+            "z": -0.06
+          },
+          "max": {
+            "x": 0.5,
+            "y": 2.1,
+            "z": 0.06
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 1.05,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 2.1,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "fence",
+        "presetVersion": 1,
+        "name": "Fence",
+        "category": "Architecture",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "width",
+          "height",
+          "depth"
+        ],
+        "defaultSizeMeters": {
+          "width": 2.4,
+          "height": 1.1,
+          "depth": 0.12
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -1.2,
+            "y": 0,
+            "z": -0.06
+          },
+          "max": {
+            "x": 1.2,
+            "y": 1.1,
+            "z": 0.06
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.55,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 1.1,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "ladder",
+        "presetVersion": 1,
+        "name": "Ladder",
+        "category": "Architecture",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "width",
+          "height"
+        ],
+        "defaultSizeMeters": {
+          "width": 0.6,
+          "height": 2.4,
+          "depth": 0.12
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.3,
+            "y": 0,
+            "z": -0.06
+          },
+          "max": {
+            "x": 0.3,
+            "y": 2.4,
+            "z": 0.06
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 1.2,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 2.4,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "statue",
+        "presetVersion": 1,
+        "name": "Abstract Statue",
+        "category": "Architecture",
+        "semanticKind": "prop",
+        "resizePolicy": "rigid-transform-only",
+        "intrinsicParameters": [],
+        "defaultSizeMeters": {
+          "width": 0.8,
+          "height": 2,
+          "depth": 0.8
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.4,
+            "y": 0,
+            "z": -0.4
+          },
+          "max": {
+            "x": 0.4,
+            "y": 2,
+            "z": 0.4
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 1,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 2,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "small-tree",
+        "presetVersion": 1,
+        "name": "Small Tree",
+        "category": "Nature",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "canopyDiameter",
+          "treeHeight"
+        ],
+        "defaultSizeMeters": {
+          "width": 2.2,
+          "height": 3.5,
+          "depth": 2.2
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -1.1,
+            "y": 0,
+            "z": -1.1
+          },
+          "max": {
+            "x": 1.1,
+            "y": 3.5,
+            "z": 1.1
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 1.75,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 3.5,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "large-tree",
+        "presetVersion": 1,
+        "name": "Large Tree",
+        "category": "Nature",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "canopyDiameter",
+          "treeHeight"
+        ],
+        "defaultSizeMeters": {
+          "width": 4.5,
+          "height": 7,
+          "depth": 4.5
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -2.25,
+            "y": 0,
+            "z": -2.25
+          },
+          "max": {
+            "x": 2.25,
+            "y": 7,
+            "z": 2.25
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 3.5,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 7,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "rock",
+        "presetVersion": 1,
+        "name": "Rock",
+        "category": "Nature",
+        "semanticKind": "prop",
+        "resizePolicy": "rigid-transform-only",
+        "intrinsicParameters": [],
+        "defaultSizeMeters": {
+          "width": 1.2,
+          "height": 0.8,
+          "depth": 1
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.6,
+            "y": 0,
+            "z": -0.5
+          },
+          "max": {
+            "x": 0.6,
+            "y": 0.8,
+            "z": 0.5
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.4,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.8,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "bush",
+        "presetVersion": 1,
+        "name": "Bush",
+        "category": "Nature",
+        "semanticKind": "prop",
+        "resizePolicy": "rigid-transform-only",
+        "intrinsicParameters": [],
+        "defaultSizeMeters": {
+          "width": 1.4,
+          "height": 1,
+          "depth": 1.2
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.7,
+            "y": 0,
+            "z": -0.6
+          },
+          "max": {
+            "x": 0.7,
+            "y": 1,
+            "z": 0.6
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.5,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 1,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "potted-plant",
+        "presetVersion": 1,
+        "name": "Potted Plant",
+        "category": "Nature",
+        "semanticKind": "prop",
+        "resizePolicy": "rigid-transform-only",
+        "intrinsicParameters": [],
+        "defaultSizeMeters": {
+          "width": 0.65,
+          "height": 1.2,
+          "depth": 0.65
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.325,
+            "y": 0,
+            "z": -0.325
+          },
+          "max": {
+            "x": 0.325,
+            "y": 1.2,
+            "z": 0.325
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.6,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 1.2,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "stump",
+        "presetVersion": 1,
+        "name": "Tree Stump",
+        "category": "Nature",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "diameter",
+          "height"
+        ],
+        "defaultSizeMeters": {
+          "width": 0.75,
+          "height": 0.6,
+          "depth": 0.75
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.375,
+            "y": 0,
+            "z": -0.375
+          },
+          "max": {
+            "x": 0.375,
+            "y": 0.6,
+            "z": 0.375
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.3,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.6,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "flower-bed",
+        "presetVersion": 1,
+        "name": "Flower Bed",
+        "category": "Nature",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "width",
+          "height",
+          "depth"
+        ],
+        "defaultSizeMeters": {
+          "width": 1.8,
+          "height": 0.5,
+          "depth": 0.8
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.9,
+            "y": 0,
+            "z": -0.4
+          },
+          "max": {
+            "x": 0.9,
+            "y": 0.5,
+            "z": 0.4
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.25,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.5,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "sedan",
+        "presetVersion": 1,
+        "name": "Sedan",
+        "category": "Street",
+        "semanticKind": "prop",
+        "resizePolicy": "rigid-transform-only",
+        "intrinsicParameters": [],
+        "defaultSizeMeters": {
+          "width": 1.8,
+          "height": 1.5,
+          "depth": 4.4
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.9,
+            "y": 0,
+            "z": -2.2
+          },
+          "max": {
+            "x": 0.9,
+            "y": 1.5,
+            "z": 2.2
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.75,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 1.5,
+            "z": 0
+          }
+        },
+        "forwardAxis": "+Z",
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "truck",
+        "presetVersion": 1,
+        "name": "Truck",
+        "category": "Street",
+        "semanticKind": "prop",
+        "resizePolicy": "rigid-transform-only",
+        "intrinsicParameters": [],
+        "defaultSizeMeters": {
+          "width": 2.4,
+          "height": 2.6,
+          "depth": 6.2
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -1.2,
+            "y": 0,
+            "z": -3.1
+          },
+          "max": {
+            "x": 1.2,
+            "y": 2.6,
+            "z": 3.1
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 1.3,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 2.6,
+            "z": 0
+          }
+        },
+        "forwardAxis": "+Z",
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "bicycle",
+        "presetVersion": 1,
+        "name": "Bicycle",
+        "category": "Street",
+        "semanticKind": "prop",
+        "resizePolicy": "rigid-transform-only",
+        "intrinsicParameters": [],
+        "defaultSizeMeters": {
+          "width": 0.45,
+          "height": 1.15,
+          "depth": 1.8
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.225,
+            "y": 0,
+            "z": -0.9
+          },
+          "max": {
+            "x": 0.225,
+            "y": 1.15,
+            "z": 0.9
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.575,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 1.15,
+            "z": 0
+          }
+        },
+        "forwardAxis": "+Z",
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "motorcycle",
+        "presetVersion": 1,
+        "name": "Motorcycle",
+        "category": "Street",
+        "semanticKind": "prop",
+        "resizePolicy": "rigid-transform-only",
+        "intrinsicParameters": [],
+        "defaultSizeMeters": {
+          "width": 0.8,
+          "height": 1.2,
+          "depth": 2.1
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.4,
+            "y": 0,
+            "z": -1.05
+          },
+          "max": {
+            "x": 0.4,
+            "y": 1.2,
+            "z": 1.05
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.6,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 1.2,
+            "z": 0
+          }
+        },
+        "forwardAxis": "+Z",
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "street-lamp",
+        "presetVersion": 1,
+        "name": "Street Lamp",
+        "category": "Street",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "diameter",
+          "lampHeight"
+        ],
+        "defaultSizeMeters": {
+          "width": 0.45,
+          "height": 3.8,
+          "depth": 0.45
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.225,
+            "y": 0,
+            "z": -0.225
+          },
+          "max": {
+            "x": 0.225,
+            "y": 3.8,
+            "z": 0.225
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 1.9,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 3.8,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "bench",
+        "presetVersion": 1,
+        "name": "Bench",
+        "category": "Street",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "seatWidth",
+          "seatHeight",
+          "seatDepth"
+        ],
+        "defaultSizeMeters": {
+          "width": 1.8,
+          "height": 0.85,
+          "depth": 0.65
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.9,
+            "y": 0,
+            "z": -0.325
+          },
+          "max": {
+            "x": 0.9,
+            "y": 0.85,
+            "z": 0.325
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.425,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.85,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "trash-bin",
+        "presetVersion": 1,
+        "name": "Trash Bin",
+        "category": "Street",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "diameter",
+          "height"
+        ],
+        "defaultSizeMeters": {
+          "width": 0.55,
+          "height": 1,
+          "depth": 0.55
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.275,
+            "y": 0,
+            "z": -0.275
+          },
+          "max": {
+            "x": 0.275,
+            "y": 1,
+            "z": 0.275
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.5,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 1,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "traffic-cone",
+        "presetVersion": 1,
+        "name": "Traffic Cone",
+        "category": "Street",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "diameter",
+          "height"
+        ],
+        "defaultSizeMeters": {
+          "width": 0.45,
+          "height": 0.7,
+          "depth": 0.45
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.225,
+            "y": 0,
+            "z": -0.225
+          },
+          "max": {
+            "x": 0.225,
+            "y": 0.7,
+            "z": 0.225
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.35,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.7,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "water-barrier",
+        "presetVersion": 1,
+        "name": "Water-filled Barrier",
+        "category": "Street",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "width",
+          "height",
+          "depth"
+        ],
+        "defaultSizeMeters": {
+          "width": 1.8,
+          "height": 1,
+          "depth": 0.5
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.9,
+            "y": 0,
+            "z": -0.25
+          },
+          "max": {
+            "x": 0.9,
+            "y": 1,
+            "z": 0.25
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.5,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 1,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "road-sign",
+        "presetVersion": 1,
+        "name": "Road Sign",
+        "category": "Street",
+        "semanticKind": "prop",
+        "resizePolicy": "rigid-transform-only",
+        "intrinsicParameters": [],
+        "defaultSizeMeters": {
+          "width": 0.8,
+          "height": 2.4,
+          "depth": 0.06
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.4,
+            "y": 0,
+            "z": -0.03
+          },
+          "max": {
+            "x": 0.4,
+            "y": 2.4,
+            "z": 0.03
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 1.2,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 2.4,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "fire-hydrant",
+        "presetVersion": 1,
+        "name": "Fire Hydrant",
+        "category": "Street",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "diameter",
+          "height"
+        ],
+        "defaultSizeMeters": {
+          "width": 0.5,
+          "height": 0.85,
+          "depth": 0.5
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.25,
+            "y": 0,
+            "z": -0.25
+          },
+          "max": {
+            "x": 0.25,
+            "y": 0.85,
+            "z": 0.25
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.425,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.85,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "oil-drum",
+        "presetVersion": 1,
+        "name": "Oil Drum",
+        "category": "Street",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "diameter",
+          "height"
+        ],
+        "defaultSizeMeters": {
+          "width": 0.58,
+          "height": 0.9,
+          "depth": 0.58
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.29,
+            "y": 0,
+            "z": -0.29
+          },
+          "max": {
+            "x": 0.29,
+            "y": 0.9,
+            "z": 0.29
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.45,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.9,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "crate",
+        "presetVersion": 1,
+        "name": "Wooden Crate",
+        "category": "Street",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "width",
+          "height",
+          "depth"
+        ],
+        "defaultSizeMeters": {
+          "width": 0.8,
+          "height": 0.65,
+          "depth": 0.7
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.4,
+            "y": 0,
+            "z": -0.35
+          },
+          "max": {
+            "x": 0.4,
+            "y": 0.65,
+            "z": 0.35
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.325,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.65,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "desk",
+        "presetVersion": 1,
+        "name": "Desk",
+        "category": "Office",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "tabletopWidth",
+          "tabletopHeight",
+          "tabletopDepth"
+        ],
+        "defaultSizeMeters": {
+          "width": 1.4,
+          "height": 0.75,
+          "depth": 0.7
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.7,
+            "y": 0,
+            "z": -0.35
+          },
+          "max": {
+            "x": 0.7,
+            "y": 0.75,
+            "z": 0.35
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.375,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.75,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "coffee-table",
+        "presetVersion": 1,
+        "name": "Coffee Table",
+        "category": "Furniture",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "tabletopWidth",
+          "tabletopHeight",
+          "tabletopDepth"
+        ],
+        "defaultSizeMeters": {
+          "width": 0.95,
+          "height": 0.42,
+          "depth": 0.55
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.475,
+            "y": 0,
+            "z": -0.275
+          },
+          "max": {
+            "x": 0.475,
+            "y": 0.42,
+            "z": 0.275
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.21,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.42,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "side-table",
+        "presetVersion": 1,
+        "name": "Side Table",
+        "category": "Furniture",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "tabletopWidth",
+          "tabletopHeight",
+          "tabletopDepth"
+        ],
+        "defaultSizeMeters": {
+          "width": 0.5,
+          "height": 0.55,
+          "depth": 0.5
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.25,
+            "y": 0,
+            "z": -0.25
+          },
+          "max": {
+            "x": 0.25,
+            "y": 0.55,
+            "z": 0.25
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.275,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.55,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "refrigerator",
+        "presetVersion": 1,
+        "name": "Refrigerator",
+        "category": "Kitchen",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "width",
+          "height",
+          "depth"
+        ],
+        "defaultSizeMeters": {
+          "width": 0.75,
+          "height": 1.85,
+          "depth": 0.72
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.375,
+            "y": 0,
+            "z": -0.36
+          },
+          "max": {
+            "x": 0.375,
+            "y": 1.85,
+            "z": 0.36
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.925,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 1.85,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "stove",
+        "presetVersion": 1,
+        "name": "Stove",
+        "category": "Kitchen",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "width",
+          "height",
+          "depth"
+        ],
+        "defaultSizeMeters": {
+          "width": 0.6,
+          "height": 0.9,
+          "depth": 0.65
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.3,
+            "y": 0,
+            "z": -0.325
+          },
+          "max": {
+            "x": 0.3,
+            "y": 0.9,
+            "z": 0.325
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.45,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.9,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "kitchen-sink",
+        "presetVersion": 1,
+        "name": "Kitchen Sink",
+        "category": "Kitchen",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "basinWidth",
+          "basinHeight",
+          "basinDepth"
+        ],
+        "defaultSizeMeters": {
+          "width": 0.8,
+          "height": 1.2,
+          "depth": 0.65
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.4,
+            "y": 0,
+            "z": -0.325
+          },
+          "max": {
+            "x": 0.4,
+            "y": 1.2,
+            "z": 0.325
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.6,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 1.2,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "kitchen-counter",
+        "presetVersion": 1,
+        "name": "Kitchen Counter",
+        "category": "Kitchen",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "width",
+          "height",
+          "depth"
+        ],
+        "defaultSizeMeters": {
+          "width": 1.2,
+          "height": 0.9,
+          "depth": 0.65
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.6,
+            "y": 0,
+            "z": -0.325
+          },
+          "max": {
+            "x": 0.6,
+            "y": 0.9,
+            "z": 0.325
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.45,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.9,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "kitchen-island",
+        "presetVersion": 1,
+        "name": "Kitchen Island",
+        "category": "Kitchen",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "width",
+          "height",
+          "depth"
+        ],
+        "defaultSizeMeters": {
+          "width": 1.6,
+          "height": 0.92,
+          "depth": 0.85
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.8,
+            "y": 0,
+            "z": -0.425
+          },
+          "max": {
+            "x": 0.8,
+            "y": 0.92,
+            "z": 0.425
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.46,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.92,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "microwave",
+        "presetVersion": 1,
+        "name": "Microwave",
+        "category": "Kitchen",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "width",
+          "height",
+          "depth"
+        ],
+        "defaultSizeMeters": {
+          "width": 0.5,
+          "height": 0.3,
+          "depth": 0.4
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.25,
+            "y": 0,
+            "z": -0.2
+          },
+          "max": {
+            "x": 0.25,
+            "y": 0.3,
+            "z": 0.2
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.15,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.3,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "wall-cabinet",
+        "presetVersion": 1,
+        "name": "Wall Cabinet",
+        "category": "Kitchen",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "width",
+          "height",
+          "depth"
+        ],
+        "defaultSizeMeters": {
+          "width": 0.8,
+          "height": 0.7,
+          "depth": 0.35
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.4,
+            "y": 0,
+            "z": -0.175
+          },
+          "max": {
+            "x": 0.4,
+            "y": 0.7,
+            "z": 0.175
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.35,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.7,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "toilet",
+        "presetVersion": 1,
+        "name": "Toilet",
+        "category": "Bathroom",
+        "semanticKind": "prop",
+        "resizePolicy": "rigid-transform-only",
+        "intrinsicParameters": [],
+        "defaultSizeMeters": {
+          "width": 0.42,
+          "height": 0.8,
+          "depth": 0.72
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.21,
+            "y": 0,
+            "z": -0.36
+          },
+          "max": {
+            "x": 0.21,
+            "y": 0.8,
+            "z": 0.36
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.4,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.8,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "washbasin",
+        "presetVersion": 1,
+        "name": "Washbasin",
+        "category": "Bathroom",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "basinWidth",
+          "basinHeight",
+          "basinDepth"
+        ],
+        "defaultSizeMeters": {
+          "width": 0.62,
+          "height": 0.85,
+          "depth": 0.5
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.31,
+            "y": 0,
+            "z": -0.25
+          },
+          "max": {
+            "x": 0.31,
+            "y": 0.85,
+            "z": 0.25
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.425,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.85,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "bathtub",
+        "presetVersion": 1,
+        "name": "Bathtub",
+        "category": "Bathroom",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "width",
+          "height",
+          "depth"
+        ],
+        "defaultSizeMeters": {
+          "width": 1.7,
+          "height": 0.6,
+          "depth": 0.8
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.85,
+            "y": 0,
+            "z": -0.4
+          },
+          "max": {
+            "x": 0.85,
+            "y": 0.6,
+            "z": 0.4
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.3,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.6,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "shower",
+        "presetVersion": 1,
+        "name": "Shower",
+        "category": "Bathroom",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "width",
+          "height",
+          "depth"
+        ],
+        "defaultSizeMeters": {
+          "width": 1,
+          "height": 2.1,
+          "depth": 1
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.5,
+            "y": 0,
+            "z": -0.5
+          },
+          "max": {
+            "x": 0.5,
+            "y": 2.1,
+            "z": 0.5
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 1.05,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 2.1,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "washing-machine",
+        "presetVersion": 1,
+        "name": "Washing Machine",
+        "category": "Bathroom",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "width",
+          "height",
+          "depth"
+        ],
+        "defaultSizeMeters": {
+          "width": 0.65,
+          "height": 0.9,
+          "depth": 0.65
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.325,
+            "y": 0,
+            "z": -0.325
+          },
+          "max": {
+            "x": 0.325,
+            "y": 0.9,
+            "z": 0.325
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.45,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.9,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "monitor",
+        "presetVersion": 1,
+        "name": "Monitor",
+        "category": "Office",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "screenWidth",
+          "screenHeight"
+        ],
+        "defaultSizeMeters": {
+          "width": 0.6,
+          "height": 0.48,
+          "depth": 0.2
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.3,
+            "y": 0,
+            "z": -0.1
+          },
+          "max": {
+            "x": 0.3,
+            "y": 0.48,
+            "z": 0.1
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.24,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.48,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "laptop",
+        "presetVersion": 1,
+        "name": "Laptop",
+        "category": "Office",
+        "semanticKind": "prop",
+        "resizePolicy": "rigid-transform-only",
+        "intrinsicParameters": [],
+        "defaultSizeMeters": {
+          "width": 0.34,
+          "height": 0.22,
+          "depth": 0.28
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.17,
+            "y": 0,
+            "z": -0.14
+          },
+          "max": {
+            "x": 0.17,
+            "y": 0.22,
+            "z": 0.14
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.11,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.22,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "window",
+        "presetVersion": 1,
+        "name": "Window",
+        "category": "Architecture",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "openingWidth",
+          "openingHeight",
+          "thickness"
+        ],
+        "defaultSizeMeters": {
+          "width": 1.4,
+          "height": 1.2,
+          "depth": 0.12
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.7,
+            "y": 0,
+            "z": -0.06
+          },
+          "max": {
+            "x": 0.7,
+            "y": 1.2,
+            "z": 0.06
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.6,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 1.2,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "railing",
+        "presetVersion": 1,
+        "name": "Railing",
+        "category": "Architecture",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "width",
+          "height"
+        ],
+        "defaultSizeMeters": {
+          "width": 2.4,
+          "height": 1.05,
+          "depth": 0.12
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -1.2,
+            "y": 0,
+            "z": -0.06
+          },
+          "max": {
+            "x": 1.2,
+            "y": 1.05,
+            "z": 0.06
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.525,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 1.05,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "cardboard-box",
+        "presetVersion": 1,
+        "name": "Cardboard Box",
+        "category": "Household",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "width",
+          "height",
+          "depth"
+        ],
+        "defaultSizeMeters": {
+          "width": 0.6,
+          "height": 0.5,
+          "depth": 0.5
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.3,
+            "y": 0,
+            "z": -0.25
+          },
+          "max": {
+            "x": 0.3,
+            "y": 0.5,
+            "z": 0.25
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.25,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.5,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "suitcase",
+        "presetVersion": 1,
+        "name": "Suitcase",
+        "category": "Household",
+        "semanticKind": "prop",
+        "resizePolicy": "rigid-transform-only",
+        "intrinsicParameters": [],
+        "defaultSizeMeters": {
+          "width": 0.48,
+          "height": 0.75,
+          "depth": 0.24
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.24,
+            "y": 0,
+            "z": -0.12
+          },
+          "max": {
+            "x": 0.24,
+            "y": 0.75,
+            "z": 0.12
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.375,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.75,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "mug",
+        "presetVersion": 1,
+        "name": "Mug",
+        "category": "Household",
+        "semanticKind": "prop",
+        "resizePolicy": "rigid-transform-only",
+        "intrinsicParameters": [],
+        "defaultSizeMeters": {
+          "width": 0.12,
+          "height": 0.1,
+          "depth": 0.09
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.06,
+            "y": 0,
+            "z": -0.045
+          },
+          "max": {
+            "x": 0.06,
+            "y": 0.1,
+            "z": 0.045
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.05,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.1,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "mirror",
+        "presetVersion": 1,
+        "name": "Mirror",
+        "category": "Household",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "screenWidth",
+          "screenHeight"
+        ],
+        "defaultSizeMeters": {
+          "width": 0.65,
+          "height": 0.9,
+          "depth": 0.06
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.325,
+            "y": 0,
+            "z": -0.03
+          },
+          "max": {
+            "x": 0.325,
+            "y": 0.9,
+            "z": 0.03
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.45,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.9,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "pendant-lamp",
+        "presetVersion": 1,
+        "name": "Pendant Lamp",
+        "category": "Household",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "diameter",
+          "lampHeight"
+        ],
+        "defaultSizeMeters": {
+          "width": 0.45,
+          "height": 0.9,
+          "depth": 0.45
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.225,
+            "y": 0,
+            "z": -0.225
+          },
+          "max": {
+            "x": 0.225,
+            "y": 0.9,
+            "z": 0.225
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.45,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.9,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      },
+      {
+        "presetId": "ceiling-fan",
+        "presetVersion": 1,
+        "name": "Ceiling Fan",
+        "category": "Household",
+        "semanticKind": "prop",
+        "resizePolicy": "semantic-intrinsics",
+        "intrinsicParameters": [
+          "fanSpan",
+          "fanHeight"
+        ],
+        "defaultSizeMeters": {
+          "width": 1.4,
+          "height": 0.25,
+          "depth": 1.4
+        },
+        "boundsMeters": {
+          "min": {
+            "x": -0.7,
+            "y": 0,
+            "z": -0.7
+          },
+          "max": {
+            "x": 0.7,
+            "y": 0.25,
+            "z": 0.7
+          }
+        },
+        "anchorsMeters": {
+          "groundCenter": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "center": {
+            "x": 0,
+            "y": 0.125,
+            "z": 0
+          },
+          "topCenter": {
+            "x": 0,
+            "y": 0.25,
+            "z": 0
+          }
+        },
+        "defaultTransform": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      }
+    ],
+    "primitives": [
+      "cube",
+      "sphere",
+      "cuboid",
+      "cylinder",
+      "cone",
+      "pyramid",
+      "torus",
+      "plane",
+      "capsule",
+      "disc",
+      "semicircle-arc",
+      "half-cylinder",
+      "simple-human"
+    ],
+    "rendering": {
+      "available": true
+    }
+  }
+}

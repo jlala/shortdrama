@@ -8,3 +8,24 @@ runs/
 # 香虫虫剧本与项目资料只留本地
 scripts/xiangchongchong/
 docs/香虫虫-*
+
+# 核验中的项目记录、剧本提示词与下载素材只留本地；只提交通用能力证据
+docs/evidence/jimeng-cli-2026-10-31/*
+!docs/evidence/jimeng-cli-2026-10-31/README.md
+!docs/evidence/jimeng-cli-2026-10-31/version.json
+!docs/evidence/jimeng-cli-2026-10-31/schema*.json
+!docs/evidence/jimeng-cli-2026-10-31/command-index.json
+!docs/evidence/jimeng-cli-2026-10-31/models-*.json
+!docs/evidence/jimeng-cli-2026-10-31/voice-sample.json
+!docs/evidence/jimeng-cli-2026-10-31/director-catalog-*.json
+!docs/evidence/jimeng-cli-2026-10-31/help-*.txt
+!docs/evidence/jimeng-cli-2026-10-31/account-capability-summary.json
+!docs/evidence/jimeng-cli-2026-10-31/numeric-project-id-check.json
+!docs/evidence/jimeng-cli-2026-10-31/text-reading-reference-check.json
+!docs/evidence/jimeng-cli-2026-10-31/media-verification.json
+!docs/evidence/jimeng-cli-2026-10-31/cloud-unchanged-check.json
+!docs/evidence/jimeng-cli-2026-10-31/verification-summary.json
+!docs/evidence/jimeng-cli-2026-10-31/director-local-test-commands.json
+!docs/evidence/jimeng-cli-2026-10-31/director-local-test.mp4
+!docs/evidence/jimeng-cli-2026-10-31/director-video-frame-*.png
+*.lock

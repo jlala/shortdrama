@@ -1,0 +1,26 @@
+用法：
+  dreamina-canvas node upscale video [flags]
+
+示例：
+  node upscale video --node-id <nodeId> --resolution 4K --credit-ceiling <credits> --wait
+
+参数：
+      --credit-ceiling int    批准的整批积分上限，不能与 --credit-token 同用
+      --credit-token string   本操作专用短期凭证，不接受 node confirm 凭证
+      --dry-run               只校验本地参数，不联网、报价、生成或写 journal
+  -h, --help                  显示 dreamina-canvas node upscale video 的帮助
+      --interval duration     --wait 轮询间隔 (default 5s)
+      --node-id strings       1..20 个唯一来源节点，可重复传入
+      --project-id string     项目 UUID；省略时读取当前项目
+      --resolution string     目标分辨率 2K 或 4K，必填
+      --submit-id strings     逐节点提交 UUID，等长同序；省略时独立生成
+      --timeout duration      --wait 最长等待时间；0 表示只查一次 (default 10m0s)
+      --title string          自定义新产物标题；后编辑默认不要传，由服务端保留源标题及操作标记
+      --wait                  提交后只读等待生成终态；默认只返回受理结果
+
+全局参数：
+      --format string     输出格式：json 或 table
+      --non-interactive   禁用交互提示
+      --profile string    本地登录态隔离名称 (default "default")
+      --region string     产品区域：cn；缺省 cn (default "cn")
+      --yes               确认策略允许由参数确认的操作

@@ -1,0 +1,27 @@
+用法：
+  dreamina-canvas node create element [flags]
+
+参数：
+      --auxiliary strings             辅助素材，可重复传入：已产出可用 image 的节点 ID 或可用 image 资源 UUID；画布已有来源节点时优先使用 Node ID，保留上游连线；Resource ID 用于资产库等无来源节点的素材或用户明确要求冻结，不自动从节点产物提取
+      --clear-tags                    清空全部颜色标签
+      --description string            Element 描述
+      --dry-run                       只做本地校验并输出计划；不连接服务端、不写草稿、不报价或扣分
+  -h, --help                          显示 dreamina-canvas node create element 的帮助
+      --import-kind string            节点导入类别：local_upload（挂本地上传登记的资源）或 external_generated（外部平台生成产物导入）；与 resource upload 的登记意图同一套词汇
+      --main string                   主素材：已产出可用素材的画布节点 ID（node_ 前缀，跟随）或可用资源 UUID（冻结）；画布已有来源节点时优先使用 Node ID，保留上游连线；Resource ID 用于资产库等无来源节点的素材或用户明确要求冻结，不自动从节点产物提取
+      --node-id string                稳定 node_id；省略时生成
+      --project-id string             项目 UUID；省略时使用当前项目
+      --resource-source stringArray   跨项目资源来源：<资源 UUID>@<来源项目 UUID>；可重复，仅声明本次保存使用的资源
+      --tag strings                   颜色标签 ID：default-tag-1..default-tag-5；仅用户明确指定时传入
+      --title string                  Element 标题；未给出则保持
+      --update-id string              稳定更新 UUID；省略时生成
+      --voice string                  音色素材：已产出可用 audio 的节点 ID 或可用 audio 资源 UUID；画布已有来源节点时优先使用 Node ID，保留上游连线；Resource ID 用于资产库等无来源节点的素材或用户明确要求冻结，不自动从节点产物提取
+      --x float                       节点左上角 X；组内为父组相对坐标；与 --y 成组提供
+      --y float                       节点左上角 Y；组内为父组相对坐标；与 --x 成组提供
+
+全局参数：
+      --format string     输出格式：json 或 table
+      --non-interactive   禁用交互提示
+      --profile string    本地登录态隔离名称 (default "default")
+      --region string     产品区域：cn；缺省 cn (default "cn")
+      --yes               确认策略允许由参数确认的操作

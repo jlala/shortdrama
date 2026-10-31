@@ -480,14 +480,14 @@ class KlingWorkflowTests(unittest.TestCase):
 
     def omni_shot(self):
         (self.directory / "elements.json").write_text(json.dumps({"schema_version": "0.2", "elements": [
-            {"key": "xiangchongchong", "name": "香虫虫", "description": "二维手绘国风少女，低马尾木簪", "tags": ["角色"],
+            {"key": "test_character", "name": "测试角色", "description": "通用测试角色，短发蓝色外套", "tags": ["角色"],
              "cover": "front.png", "secondary": ["side.png"]}]}))
         (self.directory / "motion.mp4").write_bytes(b"reference-video")
         shot = {"shot_id": "E01-SC01-SH009", "revision": "v01", "planned_edit_seconds": 9,
                 "references": [{"file": "first.png", "slot": "image_1"}, {"file": "motion.mp4", "slot": "video_1"}],
                 "video_request": {"mode": "kling_omni", "model": "kling-video-v4_0", "duration": 5, "resolution": "720p",
-                                  "aspect_ratio": "9:16", "enable_audio": False, "elements": ["xiangchongchong"],
-                                  "prompt": "单一连续镜头。<<<xiangchongchong>>>按图片1的构图，参考视频1的动作抬起铁盒"}}
+                                  "aspect_ratio": "9:16", "enable_audio": False, "elements": ["test_character"],
+                                  "prompt": "单一连续镜头。<<<test_character>>>按图片1的构图，参考视频1的动作拿起杯子"}}
         return shot
 
     def create_element(self, responses):
@@ -502,7 +502,7 @@ class KlingWorkflowTests(unittest.TestCase):
 
         with patch("workflow.call_kling", side_effect=response):
             try:
-                return workflow.kling_element(self.directory, self.project, self.state, "xiangchongchong"), calls
+                return workflow.kling_element(self.directory, self.project, self.state, "test_character"), calls
             except workflow.WorkflowError:
                 return None, calls
 
@@ -542,10 +542,10 @@ class KlingWorkflowTests(unittest.TestCase):
         record, calls = self.create_element({"element_list": {"elements": []},
                                               "element_create": workflow.WorkflowError("lost response")})
         self.assertIsNone(record)
-        stored = workflow.read_json(self.directory / "state.json")["elements"]["xiangchongchong"]
+        stored = workflow.read_json(self.directory / "state.json")["elements"]["test_character"]
         self.assertEqual(stored["phase"], "needs_check")
         remote_name = stored["input"]["remote_name"]
-        self.assertRegex(remote_name, r"^香虫虫 #[0-9a-f]{8}$")
+        self.assertRegex(remote_name, r"^测试角色 #[0-9a-f]{8}$")
         create = [args for args in calls if args[0] == "element_create"][0]
         self.assertEqual(create[create.index("--tag") + 1], "角色")
         self.assertIn(str((self.directory / "side.png").resolve()), create)
@@ -556,7 +556,7 @@ class KlingWorkflowTests(unittest.TestCase):
         self.assertEqual((record["element_id"], record["type"]), ("777", "image"))
         self.assertFalse(any(args[0] == "element_create" for args in calls))
         with patch("workflow.call_kling") as provider:
-            workflow.kling_element(self.directory, self.project, self.state, "xiangchongchong")
+            workflow.kling_element(self.directory, self.project, self.state, "test_character")
         provider.assert_not_called()
 
     def test_omni_submission_binds_elements_and_bills_input_video(self):
@@ -579,9 +579,9 @@ class KlingWorkflowTests(unittest.TestCase):
         submit = calls[-1]
         self.assertEqual(submit[0], "omni_ref_video")
         self.assertEqual(json.loads(submit[submit.index("--elements") + 1]),
-                         [{"id": "123", "bindName": "香虫虫", "type": "image"}])
+                         [{"id": "123", "bindName": "测试角色", "type": "image"}])
         self.assertEqual(submit[submit.index("--enable_audio") + 1], "false")
-        self.assertEqual(submit[submit.index("--prompt") + 1], "单一连续镜头。<<<123>>>按图片1的构图，参考视频1的动作抬起铁盒")
+        self.assertEqual(submit[submit.index("--prompt") + 1], "单一连续镜头。<<<123>>>按图片1的构图，参考视频1的动作拿起杯子")
         self.assertIn("video_1=" + str((self.directory / "motion.mp4").resolve()), submit)
         # 6 credits/s for 5 output seconds plus 4 seconds of reference video.
         self.assertEqual(record["reserved_credits"], "54")
@@ -691,7 +691,7 @@ class JimengWorkflowTests(unittest.TestCase):
 
     def test_insufficient_balance_stops_before_submission(self):
         self.saved()
-        with patch("workflow.call_jimeng", return_value={"total_credit": 80}) as provider, \
+        with patch("workflow.call_jimeng", return_value={"total_credit": 80, "user_id": 1}) as provider, \
                 self.assertRaisesRegex(workflow.WorkflowError, "80 credits"):
             workflow.jimeng_run(self.directory, self.project, self.state, self.shot)
         provider.assert_called_once_with(["user_credit"])
@@ -705,7 +705,7 @@ class JimengWorkflowTests(unittest.TestCase):
         def response(args, timeout=60):
             calls.append(args)
             if args == ["user_credit"]:
-                return {"total_credit": next(balances), "vip_level": "basic"}
+                return {"total_credit": next(balances), "user_id": 1, "vip_level": "basic"}
             stored = workflow.read_json(self.directory / "state.json")["operations"][self.key]
             self.assertEqual(stored["phase"], "submitting")
             self.assertEqual(stored["reserved_credits"], "104")
@@ -733,7 +733,7 @@ class JimengWorkflowTests(unittest.TestCase):
 
         def response(args, timeout=60):
             if args == ["user_credit"]:
-                return {"total_credit": 725}
+                return {"total_credit": 725, "user_id": 1}
             raise workflow.WorkflowError("dreamina CLI response unavailable: TimeoutExpired")
 
         with patch("workflow.call_jimeng", side_effect=response) as provider:
@@ -783,6 +783,33 @@ class JimengWorkflowTests(unittest.TestCase):
         self.assertEqual((record["phase"], record["fail_reason"]), ("failed", "content check"))
         with self.assertRaises(workflow.WorkflowError):
             workflow.jimeng_run(self.directory, self.project, self.state, self.shot)
+
+    def test_empty_user_credit_needs_a_user_checked_balance(self):
+        self.saved()
+        empty = {"total_credit": 0, "user_id": 0, "user_name": "", "vip_level": ""}
+        with patch("workflow.call_jimeng", return_value=empty) as provider, \
+                self.assertRaisesRegex(workflow.WorkflowError, "jimeng_balance_override"):
+            workflow.jimeng_run(self.directory, self.project, self.state, self.shot)
+        provider.assert_called_once_with(["user_credit"])
+        self.assertEqual(self.state["operations"][self.key]["phase"], "saved")
+        self.project["generation_authorization"]["jimeng_balance_override"] = {
+            "credits": "200", "checked_at": "2026-10-26T00:00:00+00:00", "source": "user checked web page"}
+        self.state["operations"]["E01-SC01-SH001@v01"] = {"phase": "submitted", "reserved_credits": "120",
+                                                         "submitted_at": "2026-10-26T01:00:00+00:00"}
+
+        def response(args, timeout=60):
+            if args == ["user_credit"]:
+                return empty
+            return {"submit_id": "sub-9", "gen_status": "querying"}
+
+        # 200 checked minus 120 spent since the check leaves 80, below the 104 estimate.
+        with patch("workflow.call_jimeng", side_effect=response), self.assertRaisesRegex(workflow.WorkflowError, "80"):
+            workflow.jimeng_run(self.directory, self.project, self.state, self.shot)
+        del self.state["operations"]["E01-SC01-SH001@v01"]
+        with patch("workflow.call_jimeng", side_effect=response):
+            record = workflow.jimeng_run(self.directory, self.project, self.state, self.shot)
+        self.assertEqual((record["balance_before"], record["balance_source"]), ("200", "user_checked"))
+        self.assertIsNone(record["balance_after_submit"])
 
     def test_plain_text_cli_failure_is_reported_without_links(self):
         response = Mock(returncode=1, stdout="登录成功，但当前账号没有 dreamina_cli 使用权限: 仅限会员用户使用 https://x.invalid/a?t=1\n",

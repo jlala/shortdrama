@@ -1,0 +1,33 @@
+用法：
+  dreamina-canvas node create timeline [flags]
+
+示例：
+  片段格式：<sourceId>[,选项...]
+    --clip 图片：duration=<正整数毫秒>
+    --clip 视频：trim=<起点>-<正长度>,speed=<正有限数>,volume=<0-1>,muted
+    --audio-clip 音频：start=<非负毫秒>,trim=<起点>-<正长度>,speed=<正有限数>,volume=<0-1>,muted
+    两者通用：kind=<canvas_node|resource>；不传选项时由服务端使用素材完整时长或图片默认时长
+  示例：--clip node_video,trim=1000-4000,speed=2 --clip node_image,duration=3000
+        --audio-clip node_audio,kind=canvas_node,start=0,volume=0.5
+  资产库素材或明确冻结：--clip <resourceId>,kind=resource（不建立来源节点连线）
+
+参数：
+      --audio-clip stringArray        一个音轨片段，按出现顺序排列；来源身份与 --clip 相同，但可用选项不同，详见 --help；画布已有来源节点时优先使用 Node ID，保留上游连线；Resource ID 用于资产库等无来源节点的素材或用户明确要求冻结，不自动从节点产物提取
+      --clip stringArray              一个视觉片段，按出现顺序拼接；sourceId 只接受画布节点 ID 或 Resource ID；完整格式与选项见 --help；画布已有来源节点时优先使用 Node ID，保留上游连线；Resource ID 用于资产库等无来源节点的素材或用户明确要求冻结，不自动从节点产物提取
+      --dry-run                       只做本地校验并输出计划；不连接服务端、不写草稿、不报价或扣分
+  -h, --help                          显示 dreamina-canvas node create timeline 的帮助
+      --import-kind string            节点导入类别：local_upload（挂本地上传登记的资源）或 external_generated（外部平台生成产物导入）；与 resource upload 的登记意图同一套词汇
+      --node-id string                稳定 node_id；省略时生成
+      --project-id string             项目 UUID；省略时使用当前项目
+      --resource-source stringArray   跨项目资源来源：<资源 UUID>@<来源项目 UUID>；可重复，仅声明本次保存使用的资源
+      --title string                  时间轴标题；必填
+      --update-id string              稳定更新 UUID；省略时生成
+      --x float                       节点左上角 X；组内为父组相对坐标；与 --y 成组提供
+      --y float                       节点左上角 Y；组内为父组相对坐标；与 --x 成组提供
+
+全局参数：
+      --format string     输出格式：json 或 table
+      --non-interactive   禁用交互提示
+      --profile string    本地登录态隔离名称 (default "default")
+      --region string     产品区域：cn；缺省 cn (default "cn")
+      --yes               确认策略允许由参数确认的操作

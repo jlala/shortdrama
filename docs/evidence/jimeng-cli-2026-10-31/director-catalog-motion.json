@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "1",
+  "ok": true,
+  "data": {
+    "items": [
+      {
+        "assetId": "canonical:dpa_c40939fe39b95f2f9cbbd034e1e66844",
+        "kind": "motion",
+        "name": "跺脚（跺脚）",
+        "nameEn": "Stomping",
+        "motionUsage": "direct"
+      }
+    ],
+    "hasMore": true,
+    "nextOffset": 1
+  }
+}

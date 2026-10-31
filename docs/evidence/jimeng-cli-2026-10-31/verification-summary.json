@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-31",
+  "cliVersion": "1.2.0",
+  "mappingRowCount": 115,
+  "classifications": {
+    "部分": 38,
+    "未发现": 35,
+    "直接": 37,
+    "界面": 3,
+    "待确认": 2
+  },
+  "localDryRunsPassed": 12,
+  "expectedInputRejections": 2,
+  "hashedMediaReceiptsVerified": 7,
+  "mediaFullDecodesPassed": 4,
+  "cloudDirectorUnchanged": true,
+  "newGenerationSubmitted": false,
+  "cloudWritesSubmitted": false
+}

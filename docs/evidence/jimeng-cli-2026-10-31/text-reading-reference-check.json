@@ -1,0 +1,19 @@
+{
+  "exitCode": 2,
+  "result": {
+    "schemaVersion": "1",
+    "ok": false,
+    "error": {
+      "code": "cli.invalid_command",
+      "class": "invalid_input",
+      "message": "Invalid command input. Check the command syntax, flags, and values.",
+      "retryable": false,
+      "requiredAction": "none",
+      "validation": {
+        "reasonCode": "CLI_FIELD_FORBIDDEN",
+        "fieldPath": "ref",
+        "detail": "Remove this argument; it is not supported for the selected mode or action."
+      }
+    }
+  }
+}

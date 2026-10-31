@@ -1,0 +1,24 @@
+用法：
+  dreamina-canvas director export [flags]
+
+参数：
+      --camera-id string    镜头 ID；默认输出镜头
+      --file string         本地导演台工作文件
+      --frame int           截图帧号
+  -h, --help                显示 dreamina-canvas director export 的帮助
+      --long-edge int       输出长边 1280 或 1920 (default 1280)
+      --motion-id string    导出 FBX 的动作 ID
+      --node-id string      直接操作画布导演台；与 file 互斥
+      --output string       新建产物路径（不覆盖）
+      --project-id string   画布项目 UUID；默认当前项目
+      --storyboard          使用分镜序列
+      --to-canvas           上传导出结果并创建真实画布媒体节点
+      --type string         image、video 或 fbx (default "image")
+      --workspace string    staging 或 performance；仅选择渲染工作区
+
+全局参数：
+      --format string     输出格式：json 或 table
+      --non-interactive   禁用交互提示
+      --profile string    本地登录态隔离名称 (default "default")
+      --region string     产品区域：cn；缺省 cn (default "cn")
+      --yes               确认策略允许由参数确认的操作

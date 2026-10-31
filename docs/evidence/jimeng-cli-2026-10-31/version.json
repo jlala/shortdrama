@@ -1,0 +1,1 @@
+{"schemaVersion":"1","ok":true,"data":{"version":"1.2.0","commit":"cee4f27a","buildTime":"2026-10-28T04:01:50Z","edition":"public","distribution":"cn","releaseDate":"2026-10-28","releaseNotes":"新增导演台创作与导出、视频超清、图片抠图和补帧，支持 Seedance 2.5 样片及转正。支持按展示名查找模型，查看会员档位有效期、积分余额及到期明细。优化图片超清、任务恢复和错误提示。升级后请重新登录一次。"}}

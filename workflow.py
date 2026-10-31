@@ -1056,10 +1056,29 @@ def jimeng_estimate(project, request):
 
 
 def jimeng_balance():
+    """Account balance, or None when user_credit answers without an account (user_id 0 or missing)."""
     payload = call_jimeng(["user_credit"])
     if not isinstance(payload, dict):
         raise WorkflowError("user_credit did not return an object")
+    if not payload.get("user_id"):
+        return None
     return credits(payload.get("total_credit"))
+
+
+def jimeng_checked_balance(project, state):
+    """Live balance, or the user's web-checked balance minus what this project spent since that check."""
+    live = jimeng_balance()
+    if live is not None:
+        return live, "user_credit"
+    override = project["generation_authorization"].get("jimeng_balance_override")
+    if not isinstance(override, dict) or not override.get("checked_at") or not override.get("source"):
+        raise WorkflowError("user_credit returned no account; ask the user to check the balance on the Jimeng web "
+                            "page and record generation_authorization.jimeng_balance_override")
+    spent = Decimal("0")
+    for record in state["operations"].values():
+        if isinstance(record, dict) and (record.get("submitted_at") or "") > override["checked_at"]:
+            spent += credits(record.get("actual_credits") or record.get("reserved_credits") or 0)
+    return credits(override.get("credits")) - spent, "user_checked"
 
 
 def jimeng_arguments(record):
@@ -1103,7 +1122,9 @@ def jimeng_quote(directory, project, state, shot):
     if record["phase"] not in ("saved", "quoted"):
         raise WorkflowError("Already submitted or uncertain; use resume, never quote-and-run again")
     amount = jimeng_estimate(project, record["input"]["video_request"])
-    record.update(phase="quoted", quote_credits=str(amount), account_credits=str(jimeng_balance()), quoted_at=timestamp())
+    balance = jimeng_balance()
+    record.update(phase="quoted", quote_credits=str(amount), account_credits=str(balance) if balance is not None else None,
+                  quoted_at=timestamp())
     write_state(directory, state)
     return record
 
@@ -1113,12 +1134,12 @@ def jimeng_run(directory, project, state, shot):
     if record["phase"] not in ("saved", "quoted"):
         raise WorkflowError("This version was submitted or is uncertain; use resume or a new revision")
     amount = check_budget(project, state, shot, jimeng_estimate(project, record["input"]["video_request"]))
-    before = jimeng_balance()
+    before, balance_source = jimeng_checked_balance(project, state)
     if before < amount:
         raise WorkflowError("Jimeng account has {} credits; estimate needs {}".format(before, amount))
     record.update(phase="submitting", submit_id=str(uuid.uuid4()), reserved_credits=str(amount),
                   quote_credits=str(amount), authorization_ref=project["generation_authorization"]["approval_ref"],
-                  balance_before=str(before), submitted_at=timestamp())
+                  balance_before=str(before), balance_source=balance_source, submitted_at=timestamp())
     write_state(directory, state)
     try:
         # Frames are uploaded before the submit; allow for upload time.
@@ -1136,7 +1157,8 @@ def jimeng_run(directory, project, state, shot):
     write_state(directory, state)
     try:
         # The CLI reports no charge; record the balance change for reconciliation and keep the reservation.
-        record["balance_after_submit"] = str(jimeng_balance())
+        after = jimeng_balance()
+        record["balance_after_submit"] = str(after) if after is not None else None
     except WorkflowError:
         record["balance_after_submit"] = None
     record["credit_status"] = "needs_check"

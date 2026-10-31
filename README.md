@@ -5,11 +5,14 @@
 - `production.py`：本地制作，不登录平台、不调用生成服务。
 - `workflow.py`：即梦CLI的保存、报价、生成、续查下载及选用；支持按镜头表串行执行。
 - Python 3.9+，不需要额外Python包。媒体功能需要 `ffmpeg` / `ffprobe`；macOS临时旁白使用系统 `say`。
-- 2026-10-15：24项测试通过，包括真实FFmpeg媒体测试；咖啡首帧已完成6秒、720×1280、含中文临时旁白的静态预演。即梦付费生成成功路径仍未联调。
+- 2026-10-31：独立画布 CLI 实测为 1.2.0，已完成[网页功能逐项核验](docs/即梦网页功能与CLI逐项核验-2026-10-31.md)，包括素材下载及导演台本地截图／MP4 导出；该核验不代表下面的制作脚本已接入所有新能力。账户余额查询、单首帧模式及显式模型配音等当前能力，以当前 CLI 说明及核验报告为准。
 
 | 文件 | 用途 |
 |---|---|
 | [主需求 v0.7](ai-short-drama-workflow.md) | 创作、分镜、资产及渠道要求 |
+| [短剧剧本创作基本准则 v1.1](docs/短剧剧本创作基本准则-v1.1.md) | 借鉴元曲手法的通用剧作模块；具体题材与制作约束在实际项目中补充 |
+| [即梦画布与导演台指南摘要](docs/即梦短剧工作室-画布与导演台指南摘要.md) | 网页节点、角色与场景、3D 排演及多轨剪辑的阅读要点与应用建议 |
+| [即梦网页与 CLI 逐项核验](docs/即梦网页功能与CLI逐项核验-2026-10-31.md) | CLI 1.2.0 的接口覆盖、项目标识边界与下载／导演台本地渲染实测 |
 | [开发任务](docs/development-tasks.md) | 已完成的本地功能与平台待验证项 |
 | [执行规格](docs/workflow-execution-spec.md) | 输入、媒体、恢复和交付约定 |
 | [环境检查](docs/environment-check.md) | 工具版本与限制 |
@@ -76,23 +79,22 @@ python3 production.py audit --kind comic /absolute/path/episode01.mp4 /absolute/
 
 `audit`按用户提供的手册检查**实际文件**：重复文件、文件大小、逐集时长；漫剧首次上传/整剧累计至少1200秒、单集至少30秒。默认制作金额低于30万元，单集不超过600秒；`--high-budget`为30万元及以上，单集须短于1200秒。真人短剧使用 `--kind live`，每集不超过180秒，不套用漫剧20分钟门槛。问题返回退出码2。3GB按保守的3,000,000,000字节检查；正式发布前仍需核对当时的平台规则和材料。
 
-## 即梦CLI：会员问题解决后使用
+## 即梦画布 CLI：当前入口
 
-真实项目需填写 `canvas_project_id`、实际支持的model/duration/ratio/resolution，关闭示例标记，并登记已经获得的生成授权和积分上限。
+当前独立工具为 `.tools/bin/dreamina-canvas` 1.2.0。先查实际版本、命令契约、认证与模型目录：
 
 ```bash
-python3 workflow.py --project-dir runs/my-coffee status
-python3 workflow.py --project-dir runs/my-coffee save --all
-python3 workflow.py --project-dir runs/my-coffee quote --all
-python3 workflow.py --project-dir runs/my-coffee run --all
-python3 workflow.py --project-dir runs/my-coffee resume --all
+.tools/bin/dreamina-canvas --version
+.tools/bin/dreamina-canvas schema
+.tools/bin/dreamina-canvas schema director
+.tools/bin/dreamina-canvas auth status
+.tools/bin/dreamina-canvas auth account
+.tools/bin/dreamina-canvas model list --type video
 ```
 
-`--all`按edit_order逐镜串行执行，发生错误就停止。run/quote跳过已提交或受理不确定的版本；resume只查询原任务并下载，不重新生成。去掉 `--all`，用 `--shot ... --revision ...` 指定单个镜头。下载后仍需 `select` 选用，可用production.py统一执行媒体检查与选用。
+操作与恢复要点见[当前 CLI 说明](docs/即梦画布CLI-官方说明摘要.md)，功能覆盖与实测边界见[逐项核验](docs/即梦网页功能与CLI逐项核验-2026-10-31.md)。这些独立 CLI 能力与 `workflow.py` 既有适配代码分别核验，不能仅因二进制升级就推定脚本全部可用。
 
-授权沿用项目的 `approved`、`credit_cap`、`scope` 和 `approval_ref`；未知费用不视为零。报价变化超上限时不提交。原submitId与预算占用在提交前写盘，临时确认token不落盘。输入变化用新版本，下载失败只重下载。
-
-已安装CLI位于 `.tools/bin/dreamina-canvas`，认证使用系统存储；业务恢复记录位于项目 `.cli-state`。普通沙盒可能无法读取系统登录，需同用户可读取凭据的进程；不强制重新登录、不导出凭据。
+常规生成按保存节点、实际报价、授权范围内确认运行、原任务查询与下载推进。只读报价不等于批准生成；不因任务超时重复提交。CLI 缺少的网页能力按项目协作约定交由用户操作，再核对结果并继续制作。
 
 ## 可灵 CLI：Kling 4.0 图生视频与全能参考
 
@@ -108,16 +110,16 @@ python3 workflow.py --project-dir runs/my-coffee resume --all
 两种镜头写法：
 
 - **关键帧图生视频**：`{"mode": "kling_i2v", "model": "kling-video-v4_0", "prompt": "...", "duration": 5, "resolution": "720p"}`。`references` 每项是本地文件加 `slot`：`first_image` 必填一张，`tail_image` 与 `keyframe_1`…`keyframe_10` 可选，合计最多10张；画幅跟随首帧。
-- **全能参考**：`{"mode": "kling_omni", "model": "kling-video-v4_0", "prompt": "单一连续镜头。<<<xiangchongchong>>>按图片1……", "duration": 5, "resolution": "720p", "aspect_ratio": "9:16", "enable_audio": false, "elements": ["xiangchongchong"]}`。`references` 的 `slot` 用 `image_N`、`video_N`、`audio_N`；提示词用 `图片1`、`视频1` 指代素材，用 `<<<元素键>>>` 指代主体，提交时自动换成主体编号。按秒计费，**参考视频的时长计入计费**；该模型的智能分镜（`prefer_multi_shots`）不能关闭，单镜头请在提示词里写明“单一连续镜头”，验收时检查是否被切成多镜。我们另配对白，建议 `enable_audio: false`。
+- **全能参考**：`{"mode": "kling_omni", "model": "kling-video-v4_0", "prompt": "单一连续镜头。<<<test_character>>>按图片1……", "duration": 5, "resolution": "720p", "aspect_ratio": "9:16", "enable_audio": false, "elements": ["test_character"]}`。`references` 的 `slot` 用 `image_N`、`video_N`、`audio_N`；提示词用 `图片1`、`视频1` 指代素材，用 `<<<元素键>>>` 指代主体，提交时自动换成主体编号。按秒计费，**参考视频的时长计入计费**；该模型的智能分镜（`prefer_multi_shots`）不能关闭，单镜头请在提示词里写明“单一连续镜头”，验收时检查是否被切成多镜。我们另配对白，建议 `enable_audio: false`。
 
 主体（角色、道具）写在项目的 `elements.json`：
 
 ```json
-{"schema_version": "0.2", "elements": [{"key": "xiangchongchong", "name": "香虫虫", "description": "……",
+{"schema_version": "0.2", "elements": [{"key": "test_character", "name": "测试角色", "description": "……",
   "tags": ["角色"], "cover": "正面图.png", "secondary": ["侧面图.png"]}]}
 ```
 
-`python3 workflow.py --project-dir 项目 element --key xiangchongchong`（或 `--all`）创建主体：先写盘，再查主体列表；远程名称带输入内容的8位校验码（如“香虫虫 #1a2b3c4d”），上次结果不确定时按这个名称找回、不会重复创建。主体图片改了就不能再绑定，需要换新的 key。标签只能取：角色、动物、道具、服饰、场景、特效、其他。
+`python3 workflow.py --project-dir 项目 element --key test_character`（或 `--all`）创建主体：先写盘，再查主体列表；远程名称带输入内容的8位校验码（如“测试角色 #1a2b3c4d”），上次结果不确定时按这个名称找回、不会重复创建。主体图片改了就不能再绑定，需要换新的 key。标签只能取：角色、动物、道具、服饰、场景、特效、其他。
 
 提交流程与保护：
 
@@ -129,22 +131,9 @@ python3 workflow.py --project-dir runs/my-coffee resume --all
 - `resume`：只按原 `generationId` 查询并下载无水印地址到 `outputs/`，不重新提交；签名下载地址不写进状态文件。下载长度与服务端声明的 `Content-Length` 不符时不记为完成，下次 `resume` 重新下载到新文件名；服务端没声明长度时记为 `length_check: not_declared`，选用前用 `production.py` 完整解码检查。
 - 尚未做真实提交联调：当前账号非会员、命令行可用灵感值为0。
 
-## 即梦 dreamina CLI：Seedance 首尾帧图生视频
+## 通用 dreamina 适配的状态
 
-官方通用 CLI `dreamina` 1.4.21 装在 `.tools/dreamina/`（见 [.tools/dreamina/README.md](.tools/dreamina/README.md)）。它和上面的画布 CLI 不是同一个程序；**仅限即梦会员使用**，Seedance 2.5 标注为 VIP-only。项目 `project.json` 写 `"generator": "jimeng"` 后，save／quote／run／resume／select／reconcile 改走这个 CLI。
-
-```json
-"generation_authorization": {"approved": true, "credit_cap": "260", "scope": ["E01-SC01-SH006@v01"],
-  "approval_ref": "用户在对话中同意的原文",
-  "jimeng_credit_rate": {"seedance2.5@720p": "按网页或首测实际填写的每秒积分"}}
-```
-
-- 镜头写法：`{"mode": "jimeng_frames", "model_version": "seedance2.5", "duration": 4, "video_resolution": "720p", "prompt": "..."}`；`references` 填两项，`slot` 分别为 `first_frame`、`last_frame`。只有首帧时用 `jimeng_i2v`，只填 `first_frame`。
-- 本地检查（按 1.4.21 的 `-h` 编写）：seedance2.5 时长 4—30 秒，分辨率 480p／720p／1080p，**不能写 `ratio`**（画幅跟随首帧）；seedance2.0_vip 时长 4—15 秒，分辨率 720p／1080p／4k，可以写 `ratio`；其他 2.0 型号只能 720p。
-- CLI 没有报价命令：`quote`／`run` 按 `jimeng_credit_rate[型号@分辨率] × 时长` 向上取整估算，并用 `user_credit` 查余额。`run` 先检查授权与预算上限，再把 `submitting` 写盘、提交；拿到 `submit_id` 立即保存，并记录提交前后的余额。CLI 不返回实际扣费，所以 `credit_status` 记为 `needs_check`，预留额一直计入预算上限。
-- 提交没有拿到 `submit_id` 时记为 `needs_check`，之后不会再提交这一版本。核对 `dreamina list_task` 和网页作品记录、确认确实没有提交后，才能用 `reconcile --not-submitted --evidence ...` 恢复为 `saved`。
-- `resume` 只按原 `submit_id` 调用 `query_result --download_dir`，每次下载到新的空目录，不覆盖旧文件；`gen_status=fail` 时记下 `fail_reason`，不会重新生成。下载后用 `production.py` 完整解码检查，再 `select`。
-- 尚未做真实提交联调：生成命令的返回格式按官方 SKILL 文档（`submit_id`、`gen_status`、`fail_reason`）编写，首次真实提交后需核对。
+`workflow.py` 中仍保留 `generator: "jimeng"` 的通用 dreamina 兼容代码与测试。本账号曾返回通用 CLI 权限错误，当前制作使用上方的画布 CLI。兼容代码的余额检查修复不代表通用 CLI 已恢复可用，不自动回退使用。
 
 ## 验证
 
@@ -152,6 +141,6 @@ python3 workflow.py --project-dir runs/my-coffee resume --all
 PYTHONDONTWRITEBYTECODE=1 python3 -m unittest -v test_workflow test_production
 ```
 
-2026-10-24：50项测试，49项通过，1项因本机 FFmpeg 缺少 libass 跳过（字幕烧录）。其中17项为可灵接入测试，8项为即梦 dreamina CLI 接入测试，全部使用固定返回，不调用真实服务。
+2026-11-01：51项测试，50项通过，1项因本机 FFmpeg 缺少 libass 跳过（字幕烧录）。其中17项为可灵接入测试，9项为即梦 dreamina CLI 接入测试，全部使用固定返回，不调用真实服务。即梦 `user_credit` 返回空账号（user_id 为0）时，`run` 改用用户在网页核对、写入 `generation_authorization.jimeng_balance_override`（credits、checked_at、source）的余额，并扣除此后本项目已提交的积分。
 
 媒体集成测试需要FFmpeg/ffprobe，缺少时会明确跳过。测试包括真实混合尺寸/帧率/有声与无声视频合成、实际画面顺序、字幕时间、媒体被修改、短片/长旁白阻断、打包校验，以及CLI预算和防重复提交。平台返回样例测试不等于即梦真实联调通过。
